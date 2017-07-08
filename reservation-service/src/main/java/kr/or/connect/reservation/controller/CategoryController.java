@@ -3,6 +3,7 @@ package kr.or.connect.reservation.controller;
 import kr.or.connect.reservation.domain.Category;
 import kr.or.connect.reservation.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,18 +27,14 @@ public class CategoryController {
         category.setName(name);
         category = categoryService.addCategory(category);
         System.out.println(category);
-        return "/";
-    }
-
-    @DeleteMapping
-    public String delete(@RequestParam(name="id") Long id) {
-        categoryService.delete(id);
-        return "/";
-    }
-
-    @GetMapping
-    public String selectAll(Model model) {
-        model.addAttribute("categories", categoryService.getCategories());
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable String id) {
+        categoryService.delete(Long.parseLong(id));
+        List<Category> categoryList = categoryService.getCategories();
+        return "ok";
     }
 }
