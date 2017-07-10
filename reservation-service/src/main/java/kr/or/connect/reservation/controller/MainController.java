@@ -18,8 +18,11 @@ public class MainController {
     CategoryService CategoryService;
     @GetMapping
     public String index(Model model) {
+        System.out.println("get mapping");
         System.out.println(CategoryService.getCategories());
         model.addAttribute("categories", CategoryService.getCategories());
         return "index";
     }
+
+
 }

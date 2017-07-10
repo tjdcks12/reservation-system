@@ -18,7 +18,7 @@ public class WebInitializer implements WebApplicationInitializer {
     private static final String CONFIG_LOCATION = "kr.or.connect.reservation.config";
     private static final String MAPPING_URL = "/";
 
-    public WebInitializer(){
+    public WebInitializer() {
 
     }
 
@@ -43,6 +43,7 @@ public class WebInitializer implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(MAPPING_URL);
     }
+
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.setConfigLocation(CONFIG_LOCATION);
