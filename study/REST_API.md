@@ -218,6 +218,7 @@ public class ServletContextConfig extends WebMvcConfigurerAdapter {
     }
 
     // 여기서 부터 추가된다.
+    @Bean
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(jackson2HttpMessageConverter());
         super.configureMessageConverters(converters);
