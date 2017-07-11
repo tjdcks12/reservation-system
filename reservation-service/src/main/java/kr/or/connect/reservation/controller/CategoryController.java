@@ -18,18 +18,18 @@ import java.util.List;
  * Created by ODOL on 2017. 7. 7..
  */
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/categories")
+    @GetMapping
     public Collection<Category> getAllCategory() {
         return categoryService.getCategories();
     }
 
 
-    @PostMapping("/categories")
+    @PostMapping
     public Category create(@RequestParam(name="name") String name) {
         Category category = new Category();
         category.setName(name);
@@ -37,23 +37,17 @@ public class CategoryController {
         return category;
     }
 
-    @PutMapping("/categories")
+    @PutMapping
     public Integer update(@RequestBody Category category) {
         return categoryService.update(category);
     }
 
-    @RequestMapping(value = "categories/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(@PathVariable String id) {
         categoryService.delete(Long.parseLong(id));
         List<Category> categoryList = categoryService.getCategories();
         return "ok";
     }
-
-    @GetMapping("/test")
-    public String get() {
-        return "mainpage";
-    }
-
-
+    
 }
