@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by ODOL on 2017. 7. 7..
  */
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/")
 public class MainController {
     @Autowired
@@ -21,8 +24,9 @@ public class MainController {
         System.out.println("get mapping");
         System.out.println(CategoryService.getCategories());
         model.addAttribute("categories", CategoryService.getCategories());
-        return "index";
+        return "mainpage";
     }
+
 
 
 }

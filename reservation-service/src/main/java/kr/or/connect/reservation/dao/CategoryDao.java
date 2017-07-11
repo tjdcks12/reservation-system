@@ -32,8 +32,8 @@ public class CategoryDao {
     }
 
     public Long insert(Category category) {
-        SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(category);
-        return simpleJdbcInsert.executeAndReturnKey(sqlParameterSource).longValue();
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(category);
+        return simpleJdbcInsert.executeAndReturnKey(parameterSource).longValue();
     }
 
     public List<Category> selectAll() {
@@ -44,5 +44,10 @@ public class CategoryDao {
     public int delete(Long id) {
         Map<String, ?> params = Collections.singletonMap("id", id);
         return jdbcTemplate.update(DELECT_BY_ID, params);
+    }
+
+    public int update(Category category) {
+        SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(category);
+        return jdbcTemplate.update(UPDATE_BY_ID, parameterSource);
     }
 }

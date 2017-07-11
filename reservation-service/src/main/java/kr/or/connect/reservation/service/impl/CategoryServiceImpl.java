@@ -32,7 +32,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public int delete(Long id) {
         return categoryDao.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public int update(Category category) {
+        return categoryDao.update(category);
     }
 }
