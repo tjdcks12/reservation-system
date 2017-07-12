@@ -50,4 +50,11 @@ public class CategoryDao {
 		SqlParameterSource params = new BeanPropertySqlParameterSource(category);
 		return jdbc.update(CategorySqls.UPDATE_BY_ID, params);
 	}
+	
+	public Collection<Category> select_by_id(int id){
+		Map<String, Integer> params = Collections.singletonMap("id", id);
+		return jdbc.query(CategorySqls.SELECT_BY_ID, params, rowMapper);
+	}
+	
+	
 }

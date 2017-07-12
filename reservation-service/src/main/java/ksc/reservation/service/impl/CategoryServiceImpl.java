@@ -22,6 +22,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 	
 	@Override
+	@Transactional(readOnly = false)
 	public int delete(int id) {
 		return categoryDao.delete(id);
 	}
@@ -35,8 +36,17 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 	
 	@Override
+	@Transactional(readOnly = false)
 	public int update(Category category) {
 		return categoryDao.update(category);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Collection<Category> get_by_id(int id){
+		return categoryDao.select_by_id(id);
+	}
+	
+	
 	
 }
