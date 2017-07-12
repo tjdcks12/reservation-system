@@ -11,6 +11,7 @@ var GLOBAL_VAR = {
     $lnkLogoClass: $('a.lnk_logo'),
     $btnMyClass: $('a.btn_my'),
     $eventTabLst: $('ul.event_tab_lst'),
+    $lst_event_box: $('ul.lst_event_box'),
 
     //selector
     lnkLogoClass: "a.lnk_logo",
@@ -48,8 +49,6 @@ var GLOBAL_VAR = {
         },
         setActive: function (event) {
             event.stopPropagation();
-            console.log(GLOBAL_VAR.$selectedCategory);
-            console.log(event.target);
             GLOBAL_VAR.$selectedCategory.removeClass("active");
             var $eventTarget = $(event.target).closest("li").find("a");
             $eventTarget.addClass("active");
@@ -63,14 +62,14 @@ var GLOBAL_VAR = {
         },
         appendElement: function (elements) {
             for (var i in elements) {
-                GLOBAL_VAR.$eventTabLst.append(sectionEventTabFunctions.listElement(elements[i].id, elements[i].name));
+                GLOBAL_VAR.$eventTabLst.append(sectionEventTabFunctions.categoryListElement(elements[i].id, elements[i].name));
             }
             GLOBAL_VAR.$selectedCategory = $('ul.event_tab_lst>li:first-child').find("a");
             GLOBAL_VAR.$selectedCategory.addClass("active");
             $('ul.event_tab_lst>li:last-child').find("a").addClass("last");
 
         },
-        listElement: function (id, name) {
+        categoryListElement: function (id, name) {
             var element = '<li class="item" data-category="' + id + '">' +
                 '<a class="anchor"> <span>' + name + '</span></a>' +
                 '</li>';

@@ -13,8 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static kr.or.connect.reservation.dao.CategorySqls.*;
-
+import static kr.or.connect.reservation.dao.sql.CategorySqls.*;
 /**
  * Created by ODOL on 2017. 7. 7..
  */
