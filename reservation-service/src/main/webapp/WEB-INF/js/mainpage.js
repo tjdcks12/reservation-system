@@ -19,6 +19,21 @@ var GLOBAL_VAR = {
     //global
     $selectedCategory: $('ul.event_tab_lst>li:first-child').find("a")
 };
+var product = {
+    id : undefined,
+    categoryId : undefined,
+    name : undefined,
+    description : undefined,
+    salesStart : undefined,
+    salesEnd : undefined,
+    salesFlag : undefined,
+    event : undefined,
+    createDate : undefined,
+    modifyData : undefined
+};
+
+var productList = [];
+
 
 (function (window) {
 
