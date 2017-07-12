@@ -1,30 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>kr.or.connect</groupId>
-	<artifactId>reservation-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>kr.or.connect</groupId>
+    <artifactId>reservation-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-	<properties>
-		<jdk-version>1.8</jdk-version>
-		<source-encoding>UTF-8</source-encoding>
-		<resource-encoding>UTF-8</resource-encoding>
-		<deploy-path>deploy</deploy-path>
+    <properties>
+        <jdk-version>1.8</jdk-version>
+        <source-encoding>UTF-8</source-encoding>
+        <resource-encoding>UTF-8</resource-encoding>
+        <deploy-path>deploy</deploy-path>
 
-		<!-- spring framework -->
-		<spring-framework.version>4.3.5.RELEASE</spring-framework.version>
+        <!-- spring framework -->
+        <spring-framework.version>4.3.5.RELEASE</spring-framework.version>
 
-		<logback.version>1.1.3</logback.version>
-		<jcl.slf4j.version>1.7.12</jcl.slf4j.version>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
+        <logback.version>1.1.3</logback.version>
+        <jcl.slf4j.version>1.7.12</jcl.slf4j.version>
+        <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
 
         <!-- jackson -->
         <jackson2.version>2.8.6</jackson2.version>
-	</properties>
+    </properties>
 
-	<dependencies>
-	    <!-- spring framework -->
+    <dependencies>
+        <!-- spring framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -71,27 +71,27 @@
             <artifactId>spring-web</artifactId>
             <version>${spring-framework.version}</version>
         </dependency>
-		<!-- spring mvc -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring-framework.version}</version>
-		</dependency>
+        <!-- spring mvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
 
-		<!--Servlet -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- basic data source -->
+        <!--Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- basic data source -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -103,8 +103,8 @@
             <artifactId>commons-dbcp2</artifactId>
             <version>2.1.1</version>
         </dependency>
-        
- 
+
+
         <!-- spring test -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -180,38 +180,38 @@
             <artifactId>jrebel-maven-plugin</artifactId>
             <version>1.1.7</version>
         </dependency>
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<source>${jdk-version}</source>
-					<target>${jdk-version}</target>
-					<encoding>${source-encoding}</encoding>
-					<useIncrementalCompilation>false</useIncrementalCompilation>
-				</configuration>
-			</plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${jdk-version}</source>
+                    <target>${jdk-version}</target>
+                    <encoding>${source-encoding}</encoding>
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                </configuration>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.6.1</version>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<port>8080</port>
-					<path>/</path>
-					<uriEncoding>utf-8</uriEncoding>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/</path>
+                    <uriEncoding>utf-8</uriEncoding>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.zeroturnaround</groupId>
@@ -228,7 +228,7 @@
                 </executions>
             </plugin>
 
-		</plugins>
-	</build>
+        </plugins>
+    </build>
 
 </project>

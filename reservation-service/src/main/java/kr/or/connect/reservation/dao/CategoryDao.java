@@ -1,5 +1,4 @@
 package kr.or.connect.reservation.dao;
-import static kr.or.connect.reservation.dao.CategorySqls.*;
 import kr.or.connect.reservation.domain.Category;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,9 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static kr.or.connect.reservation.dao.CategorySqls.*;
 
 /**
  * Created by ODOL on 2017. 7. 7..
@@ -37,8 +37,7 @@ public class CategoryDao {
     }
 
     public List<Category> selectAll() {
-        Map<String, Object> paramsMap = Collections.emptyMap();
-        return jdbcTemplate.query(SELECT_ALL, paramsMap, rowMapper);
+        return jdbcTemplate.query(SELECT_ALL, rowMapper);
     }
 
     public int delete(Long id) {
