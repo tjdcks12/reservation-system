@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 @RequestMapping("/main")
 public class MainController {
-    @GetMapping("/{id}")
-    public String index(@PathVariable("id") int i) {
-        System.out.println(i);
+    @GetMapping
+    public String index() {
+        System.out.println();
         return "mainpage";
     }
 }

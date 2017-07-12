@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="ko">
-
 <head>
     <meta charset="utf-8">
     <meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
@@ -75,34 +74,34 @@
             </div>
             <div class="section_event_tab">
                 <ul class="event_tab_lst tab_lst_min">
-                    <li class="item" data-category="1">
-                        <a class="anchor active"> <span>전체</span> </a>
-                    </li>
-                    <li class="item" data-category="2">
-                        <a class="anchor"> <span>전시</span> </a>
-                    </li>
-                    <li class="item" data-category="3">
-                        <!-- [D] 활성화 된 anchor는 active 추가 -->
-                        <a class="anchor"> <span>뮤지컬</span> </a>
-                    </li>
-                    <li class="item" data-category="4">
-                        <a class="anchor"> <span>콘서트</span> </a>
-                    </li>
-                    <li class="item" data-category="5">
-                        <a class="anchor"> <span>클래식</span> </a>
-                    </li>
-                    <li class="item" data-category="6">
-                        <a class="anchor"> <span>연극</span> </a>
-                    </li>
-                    <li class="item" data-category="7">
-                        <a class="anchor"> <span>클래스</span> </a>
-                    </li>
-                    <li class="item" data-category="8">
-                        <a class="anchor"> <span>체험</span> </a>
-                    </li>
-                    <li class="item" data-category="9">
-                        <a class="anchor last"> <span>키즈</span> </a>
-                    </li>
+                    <%--<li class="item" data-category="1">--%>
+                        <%--<a class="anchor active"> <span>전체</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="2">--%>
+                        <%--<a class="anchor"> <span>전시</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="3">--%>
+                        <%--<!-- [D] 활성화 된 anchor는 active 추가 -->--%>
+                        <%--<a class="anchor"> <span>뮤지컬</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="4">--%>
+                        <%--<a class="anchor"> <span>콘서트</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="5">--%>
+                        <%--<a class="anchor"> <span>클래식</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="6">--%>
+                        <%--<a class="anchor"> <span>연극</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="7">--%>
+                        <%--<a class="anchor"> <span>클래스</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="8">--%>
+                        <%--<a class="anchor"> <span>체험</span> </a>--%>
+                    <%--</li>--%>
+                    <%--<li class="item" data-category="9">--%>
+                        <%--<a class="anchor last"> <span>키즈</span> </a>--%>
+                    <%--</li>--%>
                 </ul>
             </div>
             <div class="section_event_lst">
@@ -177,7 +176,7 @@
     </footer>
 
     <script src='http://code.jquery.com/jquery-latest.min.js'></script>
-    <script src="/resources/js/mainpage.js"></script>
+    <script src="../js/mainpage.js"></script>
 </body>
 
 </html>

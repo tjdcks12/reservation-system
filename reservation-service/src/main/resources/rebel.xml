@@ -13,7 +13,11 @@
 
 	<web>
 		<link target="/">
-			<dir name="/Users/odol/Documents/Boost/reservation-system/reservation-service/src/main/webapp">
+			<dir name="/Users/odol/Documents/Boost/reservation-system/reservation-service/src/main/webapp/WEB-INF/views">
+			</dir>
+		</link>
+		<link target="/">
+			<dir name="/Users/odol/Documents/Boost/reservation-system/reservation-service/src/main/webapp/WEB-INF/js">
 			</dir>
 		</link>
 	</web>

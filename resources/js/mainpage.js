@@ -2,7 +2,7 @@
  * Created by ODOL on 2017. 7. 10..
  */
 (function (window) {
-
+	var taet = "teasdasd";
 })(window);
 
 var commonFunctions = {
@@ -17,6 +17,7 @@ var commonFunctions = {
             data: data
         })
     }
+
 }
 
 
