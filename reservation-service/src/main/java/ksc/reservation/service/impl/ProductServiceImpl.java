@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ksc.reservatino.dto.ProductDto;
 import ksc.reservation.dao.ProductDao;
+import ksc.reservation.dto.ProductDto;
 import ksc.reservation.service.ProductService;
 
 @Service

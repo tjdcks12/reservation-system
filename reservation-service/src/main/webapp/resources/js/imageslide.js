@@ -1,5 +1,5 @@
-var commonJS = {
-  imgRolling: function(autoRollingClass, autoBoolean) {
+var slideModule = (function() {
+  var imgRolling = function (autoRollingClass, autoBoolean) {
     var findElement = $("." + autoRollingClass).find(" > ul");
     var itemLength = findElement.find(" > li").length;
     var btnPlay = autoBoolean;
@@ -10,7 +10,7 @@ var commonJS = {
 
     timer = setInterval(moveNextSlide, speed);
 
-    //프로모션 영역에 마우스 올려놓을시 Interval함수 정지(4초)
+    // 프로모션 영역에 마우스 올려놓을시 Interval함수 정지(4초)
     findElement.on({
 
       "mouseenter": function() {
@@ -20,8 +20,8 @@ var commonJS = {
           clearInterval(timer);
           timer = setInterval(moveNextSlide, speed);
         }, 2000);
-        //2초하면 2초기다렸다가 2초후에 함수가 발동되므로 4초
-        //!isanimated ..
+        // 2초하면 2초기다렸다가 2초후에 함수가 발동되므로 4초
+        // !isanimated ..
       },
       "mouseleave": function() {
         clearInterval(timer);
@@ -36,7 +36,7 @@ var commonJS = {
       }
     });
 
-    //<버튼클릭시
+    // <버튼클릭시
     $('.nxt_inn').on({
       "click": function() {
         movePrevSlide();
@@ -64,8 +64,9 @@ var commonJS = {
       }, "normal");
     }
   }
-}
+  return {imgRolling : imgRolling}
+})();
 
 $(document).ready(function() {
-  commonJS.imgRolling("rollingList", true);
+  slideModule.imgRolling("rollingList", true);
 });

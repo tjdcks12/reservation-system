@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -35,7 +35,7 @@
 						</div>
 						<div>
 							<div class="container_visual">
-								<!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 --->
+								<!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 -->
 								<div class="rollingList">
 									<ul class="visual_img">
 										<li class="item"
@@ -126,10 +126,14 @@
 		<span class="copyright">© NAVER Corp.</span>
 	</div>
 	</footer>
-
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	
+</body>
+	
+	<jsp:include page="handlerbarsTemplate.jsp" flush="false"/>
+	<script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script src="/resources/js/app.js"></script>
 	<script src="/resources/js/imageslide.js"></script>
-</body>
 </html>
 

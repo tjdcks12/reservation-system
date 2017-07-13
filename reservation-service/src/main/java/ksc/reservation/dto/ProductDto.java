@@ -1,4 +1,4 @@
-package ksc.reservatino.dto;
+package ksc.reservation.dto;
 
 public class ProductDto {
 	int id;
@@ -7,8 +7,16 @@ public class ProductDto {
 	int type;
 	String name;
 	String description;
+	String content;
 	String event;
 	
+	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public int getId() {
 		return id;
 	}

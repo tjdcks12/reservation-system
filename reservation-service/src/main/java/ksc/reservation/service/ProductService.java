@@ -2,7 +2,7 @@ package ksc.reservation.service;
 
 import java.util.Collection;
 
-import ksc.reservatino.dto.ProductDto;
+import ksc.reservation.dto.ProductDto;
 
 public interface ProductService {
 	public Collection<ProductDto> get(int limit);
