@@ -1,6 +1,7 @@
 package kr.or.connect.reservation.dao;
 
 import kr.or.connect.reservation.domain.Product;
+import kr.or.connect.reservation.dto.ProductDto;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -22,6 +23,7 @@ public class ProductDao {
     private NamedParameterJdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;
     private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class);
+    private RowMapper<ProductDto> dtoRowMapper = BeanPropertyRowMapper.newInstance(ProductDto.class);
 
     public ProductDao(DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -31,9 +33,12 @@ public class ProductDao {
         return jdbcTemplate.query(SELECT_ALL, rowMapper);
     }
 
-    public List<Product> selectByCategoryId(Long categoryId) {
+    public List<ProductDto> selectByCategoryId(Long categoryId, Integer offset, Integer limit) {
         Map<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("category_id", categoryId);
-        return jdbcTemplate.query(SELECT_BY_CATEGORY_ID, paramsMap, rowMapper);
+        paramsMap.put("offset", offset);
+        paramsMap.put("limit", limit);
+
+        return jdbcTemplate.query(SELECT_BY_CATEGORY_ID, paramsMap, dtoRowMapper);
     }
 }
