@@ -33,9 +33,8 @@ public class ProductDao {
         return jdbcTemplate.query(SELECT_ALL, rowMapper);
     }
 
-    public List<ProductDto> selectByCategoryId(Long categoryId, Integer offset, Integer limit) {
+    public List<ProductDto> selectByOffset(Integer offset, Integer limit) {
         Map<String, Object> paramsMap = new HashMap<>();
-        paramsMap.put("category_id", categoryId);
         paramsMap.put("offset", offset);
         paramsMap.put("limit", limit);
 

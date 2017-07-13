@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductDto> getProductsByCategoryId(Long categoryId, Integer offset, Integer limit) {
-        return productDao.selectByCategoryId(categoryId, offset, limit);
+    public List<ProductDto> getProductsByOffset(Integer offset, Integer limit) {
+        return productDao.selectByOffset(offset, limit);
     }
 }

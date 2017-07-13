@@ -18,16 +18,14 @@ var GLOBAL_VAR = {
 
     //global
     $selectedCategory: $('ul.event_tab_lst>li:first-child').find("a"),
-    activeCategory: 1,
+    activeCategory: 0,
     reservationCount: 0,
-    productList: []
+    productList: [],
+    offset: 0
 };
 
 
-
 (function (window) {
-
-    console.log("window");
 
     var commonAPIs = {
         bindEventOnClick: function ($wrapperDom, targetDom, func) {
@@ -48,9 +46,9 @@ var GLOBAL_VAR = {
                 products: []
             };
             for (var i in productList) {
-                if (productList[i].categoryId === activeCategoryId) {
+                if (activeCategoryId === 0 || productList[i].categoryId === activeCategoryId) {
                     activeProducts.count++;
-                    activeProducts.products.add(productList[i]);
+                    activeProducts.products.push(productList[i]);
                 }
             }
             return activeProducts;
@@ -60,15 +58,27 @@ var GLOBAL_VAR = {
     //event box
     var sectionEventBoxFunctions = {
         init: function () {
-            this.getAllProducts(GLOBAL_VAR.activeCategory, 0, 4);
+            this.renderProductList(GLOBAL_VAR.activeCategory, GLOBAL_VAR.offset, 4);
+
         },
-        getAllProducts: function (category, offset, limit) {
+        renderProductList: function (category, offset, limit) {
             //ajax를 통해 모든 공연을 가져와서 리스트로 보관
-            var getProducts = commonAPIs.ajax(undefined, API_ROOT_URL + "products/" + category + "/" + offset + "/" + limit, "json", "get", "json");
-            getProducts.then(function(data) {
-               GLOBAL_VAR.productList = data;
-               //------여기서 랜더링 해줘야 함
+            var getProducts = commonAPIs.ajax(undefined, API_ROOT_URL + "products/" + offset + "/" + limit, "json", "get", "json");
+            getProducts.then(function (productList) {
+                GLOBAL_VAR.productList = productList;
+                sectionEventBoxFunctions.appendElement(GLOBAL_VAR.activeCategory, GLOBAL_VAR.productList);
+                GLOBAL_VAR.offset = 4;
             });
+        },
+        appendElement: function (activeCategoryId, productList) {
+            var activeProducts = commonAPIs.getActiveProducts(activeCategoryId, productList);
+            var products = activeProducts.products;
+            for (var i = GLOBAL_VAR.offset in products) {
+                var $target = ((i % 2 === 0) ? $('ul.left') : $('ul.right'));
+                var element = sectionEventBoxFunctions.eventBoxElement(products[i].name, products[i].saveFileName, products[i].placeName, products[i].description);
+                $target.append(element);
+            }
+
         },
         eventBoxElement: function (imgAlt, imgSrc, smallLocation, pDescription) {
             // var element =
@@ -85,10 +95,10 @@ var GLOBAL_VAR = {
             var template = $('#productListTemplate').html();
             var templateScript = Handlebars.compile(template);
             var context = {
-                "imgAlt" : imgAlt,
-                "imgSrc" : imgSrc,
-                "smallLocation" : smallLocation,
-                "pDescription" : pDescription
+                "imgAlt": imgAlt,
+                "imgSrc": imgSrc,
+                "smallLocation": smallLocation,
+                "pDescription": pDescription
             };
             var element = templateScript(context);
             return element;
@@ -115,7 +125,12 @@ var GLOBAL_VAR = {
         renderCategoryList: function () {
             var getCategories = commonAPIs.ajax(undefined, API_ROOT_URL + "categories/", "json", "get", "json");
             getCategories.then(function (categories) {
-                sectionEventTabFunctions.appendElement(categories);
+                var defaultCategory = {
+                    id : 0,
+                    name : "전체"
+                };
+                var addCategory = [defaultCategory];
+                sectionEventTabFunctions.appendElement(addCategory.concat(categories));
             })
         },
         appendElement: function (elements) {
@@ -130,8 +145,8 @@ var GLOBAL_VAR = {
             var template = $('#categoryListTemplate').html();
             var templateScript = Handlebars.compile(template);
             var context = {
-                "id" : id,
-                "name" : name
+                "id": id,
+                "name": name
             };
             var element = templateScript(context);
             return element;
@@ -155,7 +170,6 @@ var GLOBAL_VAR = {
     headFunctions.init();
     sectionEventTabFunctions.init();
     sectionEventBoxFunctions.init();
-
 
 
 })(window);

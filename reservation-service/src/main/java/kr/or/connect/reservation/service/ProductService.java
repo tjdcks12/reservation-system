@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface ProductService {
     List<Product> getAllProducts();
-    List<ProductDto> getProductsByCategoryId(Long categoryId, Integer offset, Integer limit);
+    List<ProductDto> getProductsByOffset(Integer offset, Integer limit);
 }

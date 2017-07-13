@@ -19,7 +19,6 @@ public class ProductSqls {
                     + " ON P.id = PI.product_id"
                     + " JOIN file AS F"
                     + " ON F.id = PI.file_id"
-                    + " WHERE P.category_id = :category_id"
                     + " LIMIT :offset, :limit";
 
 }

@@ -25,11 +25,10 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/{categoryId}/{offset}/{limit}")
-    public Collection<ProductDto> getProductsByCategoryId(
-            @PathVariable("categoryId") Long categoryId,
+    @GetMapping("/{offset}/{limit}")
+    public Collection<ProductDto> getProductsByOffset(
             @PathVariable("offset") Integer offset,
             @PathVariable("limit") Integer limit) {
-        return productService.getProductsByCategoryId(categoryId, offset, limit);
+        return productService.getProductsByOffset(offset, limit);
     }
 }
