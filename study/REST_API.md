@@ -896,7 +896,6 @@ public class MemberRestControllerTest {
 
         // controller내부적으로 회원정보가 등록할 때 addMember가 호출되었는지 검사한다.
         verify(memberService).addMember(any(Member.class));
-
     }
 
 
