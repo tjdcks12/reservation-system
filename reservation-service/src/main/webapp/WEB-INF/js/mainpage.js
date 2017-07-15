@@ -29,7 +29,7 @@ var GLOBAL_VAR = {
 
 (function (window) {
 
-    var commonAPIs = {
+    var commonAPIModule = {
         bindEventOnClick: function ($wrapperDom, targetDom, func) {
             $wrapperDom.on('click', targetDom, func);
         },
@@ -60,7 +60,7 @@ var GLOBAL_VAR = {
     };
 
     //event box(product list)
-    var sectionEventBoxFunctions = {
+    var productListModule = {
         init: function () {
             this.renderProductList(4);
         },
@@ -73,21 +73,21 @@ var GLOBAL_VAR = {
             } else {
                 url  = API_ROOT_URL + "products/" + GLOBAL_VAR.offset + "/" +limit;
             }
-            var getProducts = commonAPIs.ajax(undefined, url, "json", "get", "json");
+            var getProducts = commonAPIModule.ajax(undefined, url, "json", "get", "json");
             getProducts.then(function (products) {
                 GLOBAL_VAR.productList = products;
-                sectionEventBoxFunctions.appendElement(category, products);
+                productListModule.appendElement(category, products);
                 GLOBAL_VAR.offset = GLOBAL_VAR.offset + products.length;
             });
         },
 
         appendElement: function (activeCategoryId, products) {
-            // var activeProducts = commonAPIs.getActiveProducts(activeCategoryId, productList);
+            // var activeProducts = commonAPIModule.getActiveProducts(activeCategoryId, productList);
             // var products = activeProducts.products;
             // for (var i = GLOBAL_VAR.offset; i < (limit + GLOBAL_VAR.offset); i++) {
             for(var i in products) {
                 var $target = ((i % 2 === 0) ? $('ul.left') : $('ul.right'));
-                var element = sectionEventBoxFunctions.eventBoxElement(
+                var element = productListModule.eventBoxElement(
                     products[i].categoryId, products[i].name, products[i].saveFileName, products[i].placeName, products[i].description);
                 $target.append(element);
             }
@@ -127,7 +127,7 @@ var GLOBAL_VAR = {
 
 
     //category select section
-    var sectionEventTabFunctions = {
+    var categoryModule = {
         init: function () {
             this.renderCategoryList();
             this.bindClickEvent();
@@ -135,8 +135,8 @@ var GLOBAL_VAR = {
         },
 
         bindClickEvent: function () {
-            commonAPIs.bindEventOnClick(GLOBAL_VAR.$eventTabLst, "a.anchor", sectionEventTabFunctions.setActive.bind(this));
-            commonAPIs.bindEventOnClick(GLOBAL_VAR.$btnMore, sectionEventBoxFunctions.renderProductList.bind(undefined, 2));
+            commonAPIModule.bindEventOnClick(GLOBAL_VAR.$eventTabLst, "a.anchor", categoryModule.setActive.bind(this));
+            commonAPIModule.bindEventOnClick(GLOBAL_VAR.$btnMore, productListModule.renderProductList.bind(undefined, 2));
         },
 
         setActive: function (event) {
@@ -146,9 +146,9 @@ var GLOBAL_VAR = {
             $eventTarget.addClass("active");
             GLOBAL_VAR.$selectedCategory = $eventTarget;
             GLOBAL_VAR.activeCategory = $eventTarget.closest(".item").data("category");
-            sectionEventBoxFunctions.removeListItem(GLOBAL_VAR.$lstEventBox);
-            sectionEventBoxFunctions.renderProductList(4);
-            // sectionEventTabFunctions.setActiveProductsCount();
+            productListModule.removeListItem(GLOBAL_VAR.$lstEventBox);
+            productListModule.renderProductList(4);
+            // categoryModule.setActiveProductsCount();
         },
 
         setActiveProductsCount: function () {
@@ -160,27 +160,27 @@ var GLOBAL_VAR = {
             //         count = ((GLOBAL_VAR.productList[i].categoryId === GLOBAL_VAR.activeCategory ) ? count+1 : count);
             //     }
             // }
-            var getCount = commonAPIs.ajax(undefined, API_ROOT_URL + "products/count", "json", "get", "json");
+            var getCount = commonAPIModule.ajax(undefined, API_ROOT_URL + "products/count", "json", "get", "json");
             getCount.then(function (count) {
                 GLOBAL_VAR.$pEventLstTxt.text(count + "개");
             });
         },
 
         renderCategoryList: function () {
-            var getCategories = commonAPIs.ajax(undefined, API_ROOT_URL + "categories/", "json", "get", "json");
+            var getCategories = commonAPIModule.ajax(undefined, API_ROOT_URL + "categories/", "json", "get", "json");
             getCategories.then(function (categories) {
                 var defaultCategory = {
                     id: 0,
                     name: "전체"
                 };
                 var addCategory = [defaultCategory];
-                sectionEventTabFunctions.appendElement(addCategory.concat(categories));
+                categoryModule.appendElement(addCategory.concat(categories));
             })
         },
 
         appendElement: function (elements) {
             for (var i in elements) {
-                GLOBAL_VAR.$eventTabLst.append(sectionEventTabFunctions.categoryListElement(elements[i].id, elements[i].name));
+                GLOBAL_VAR.$eventTabLst.append(categoryModule.categoryListElement(elements[i].id, elements[i].name));
             }
             GLOBAL_VAR.$selectedCategory = $('ul.event_tab_lst>li:first-child').find("a.anchor");
             GLOBAL_VAR.$selectedCategory.addClass("active");
@@ -206,7 +206,7 @@ var GLOBAL_VAR = {
         },
 
         bindClickEvent: function () {
-            commonAPIs.bindEventOnClick(GLOBAL_VAR.$headerClass, GLOBAL_VAR.lnkLogoClass, headFunctions.moveToLocation.bind(undefined, ROOT_URL));
+            commonAPIModule.bindEventOnClick(GLOBAL_VAR.$headerClass, GLOBAL_VAR.lnkLogoClass, headFunctions.moveToLocation.bind(undefined, ROOT_URL));
         },
 
         moveToLocation: function (url) {
@@ -216,8 +216,8 @@ var GLOBAL_VAR = {
     };
 
     headFunctions.init();
-    sectionEventTabFunctions.init();
-    sectionEventBoxFunctions.init();
+    categoryModule.init();
+    productListModule.init();
 
 
 })(window);
