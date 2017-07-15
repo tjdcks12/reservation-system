@@ -1,7 +1,6 @@
 package kr.or.connect.reservation.service.impl;
 
 import kr.or.connect.reservation.dao.ProductDao;
-import kr.or.connect.reservation.domain.Product;
 import kr.or.connect.reservation.dto.ProductDto;
 import kr.or.connect.reservation.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,18 @@ public class ProductServiceImpl implements ProductService {
     ProductDao productDao;
     @Override
     @Transactional(readOnly = true)
-    public List<Product> getAllProducts() {
-        return productDao.selectAll();
+    public List<ProductDto> getProducts(Integer offset, Integer limit) {
+        return productDao.selectAllLimit(offset, limit);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductDto> getProductsByOffset(Integer offset, Integer limit) {
-        return productDao.selectByOffset(offset, limit);
+    public List<ProductDto> getProductsByCategory(Integer category, Integer offset, Integer limit) {
+        return productDao.selectByCategory(category, offset, limit);
+    }
+
+    @Override
+    public Integer getProductsCount() {
+        return productDao.count();
     }
 }

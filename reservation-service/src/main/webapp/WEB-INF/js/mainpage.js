@@ -11,7 +11,10 @@ var GLOBAL_VAR = {
     $lnkLogoClass: $('a.lnk_logo'),
     $btnMyClass: $('a.btn_my'),
     $eventTabLst: $('ul.event_tab_lst'),
-    $wrap_event_box: $('div.wrap_event_box'),
+    $lstEventBox: $('ul.lst_event_box'),
+    $wrapEventBox: $('div.wrap_event_box'),
+    $pEventLstTxt: $('span.pink'),
+    $btnMore: $('div.more>button'),
 
     //selector
     lnkLogoClass: "a.lnk_logo",
@@ -19,7 +22,6 @@ var GLOBAL_VAR = {
     //global
     $selectedCategory: $('ul.event_tab_lst>li:first-child').find("a"),
     activeCategory: 0,
-    reservationCount: 0,
     productList: [],
     offset: 0
 };
@@ -31,6 +33,7 @@ var GLOBAL_VAR = {
         bindEventOnClick: function ($wrapperDom, targetDom, func) {
             $wrapperDom.on('click', targetDom, func);
         },
+
         ajax: function (data, url, dataType, type, contentType) {
             return $.ajax({
                 data: JSON.stringify(data),
@@ -40,6 +43,7 @@ var GLOBAL_VAR = {
                 contentType: ((contentType === undefined) ? CONTENT_TYPE_DEFAULT : CONTENT_TYPE_JSON)
             });
         },
+
         getActiveProducts: function (activeCategoryId, productList) {
             var activeProducts = {
                 count: 0,
@@ -55,46 +59,45 @@ var GLOBAL_VAR = {
         }
     };
 
-    //event box
+    //event box(product list)
     var sectionEventBoxFunctions = {
         init: function () {
-            this.renderProductList(GLOBAL_VAR.activeCategory, GLOBAL_VAR.offset, 4);
-
+            this.renderProductList(4);
         },
-        renderProductList: function (category, offset, limit) {
-            //ajax를 통해 모든 공연을 가져와서 리스트로 보관
-            var getProducts = commonAPIs.ajax(undefined, API_ROOT_URL + "products/" + offset + "/" + limit, "json", "get", "json");
-            getProducts.then(function (productList) {
-                GLOBAL_VAR.productList = productList;
-                sectionEventBoxFunctions.appendElement(GLOBAL_VAR.activeCategory, GLOBAL_VAR.productList);
-                GLOBAL_VAR.offset = 4;
+
+        renderProductList: function (limit) {
+            var url;
+            var category = GLOBAL_VAR.activeCategory;
+            if(category !== 0 ) {
+                url = API_ROOT_URL + "products/" + category + "/" + GLOBAL_VAR.offset + "/" +limit;
+            } else {
+                url  = API_ROOT_URL + "products/" + GLOBAL_VAR.offset + "/" +limit;
+            }
+            var getProducts = commonAPIs.ajax(undefined, url, "json", "get", "json");
+            getProducts.then(function (products) {
+                GLOBAL_VAR.productList = products;
+                sectionEventBoxFunctions.appendElement(category, products);
+                GLOBAL_VAR.offset = GLOBAL_VAR.offset + products.length;
             });
         },
-        appendElement: function (activeCategoryId, productList) {
-            var activeProducts = commonAPIs.getActiveProducts(activeCategoryId, productList);
-            var products = activeProducts.products;
-            for (var i = GLOBAL_VAR.offset in products) {
+
+        appendElement: function (activeCategoryId, products) {
+            // var activeProducts = commonAPIs.getActiveProducts(activeCategoryId, productList);
+            // var products = activeProducts.products;
+            // for (var i = GLOBAL_VAR.offset; i < (limit + GLOBAL_VAR.offset); i++) {
+            for(var i in products) {
                 var $target = ((i % 2 === 0) ? $('ul.left') : $('ul.right'));
-                var element = sectionEventBoxFunctions.eventBoxElement(products[i].name, products[i].saveFileName, products[i].placeName, products[i].description);
+                var element = sectionEventBoxFunctions.eventBoxElement(
+                    products[i].categoryId, products[i].name, products[i].saveFileName, products[i].placeName, products[i].description);
                 $target.append(element);
             }
-
         },
-        eventBoxElement: function (imgAlt, imgSrc, smallLocation, pDescription) {
-            // var element =
-            //     '<li class=item>' +
-            //     '<a href="#" class="item_book">' +
-            //     '<div class="item_preview">' +
-            //     '<img alt=' + imgAlt + 'class="img_thumb" src="' + imgSrc + '">' +
-            //     '<span class="img_border"></span>' +
-            //     '</div>' +
-            //     '<div class="event_txt">' +
-            //     '<h4 class="event_txt_tit"> <span>' + imgAlt + '</span>' +
-            //     '<small class="sm">' + smallLocation + '</small> </h4>' +
-            //     '<p class="event_txt_dsc">' + pDescription + '</p></div></a></li> ';
+
+        eventBoxElement: function (id, imgAlt, imgSrc, smallLocation, pDescription) {
             var template = $('#productListTemplate').html();
             var templateScript = Handlebars.compile(template);
             var context = {
+                "id": id,
                 "imgAlt": imgAlt,
                 "imgSrc": imgSrc,
                 "smallLocation": smallLocation,
@@ -102,18 +105,40 @@ var GLOBAL_VAR = {
             };
             var element = templateScript(context);
             return element;
+        },
+
+        removeListItem: function ($parentElement) {
+            var target = $parentElement.find("li.item");
+            $(target).remove();
+            GLOBAL_VAR.offset = 0;
+            // if (GLOBAL_VAR.activeCategory === 0) {
+            //     $(target).show();
+            // } else {
+            //     $(target.filter(function (item) {
+            //         return $(item).data("category") !== GLOBAL_VAR.activeCategory;
+            //     })).hide();
+            //
+            //     $(target.filter(function (i, item) {
+            //         return $(item).data("category") === GLOBAL_VAR.activeCategory;
+            //     })).show();
+            // }
         }
     }
+
 
     //category select section
     var sectionEventTabFunctions = {
         init: function () {
             this.renderCategoryList();
             this.bindClickEvent();
+            this.setActiveProductsCount();
         },
+
         bindClickEvent: function () {
             commonAPIs.bindEventOnClick(GLOBAL_VAR.$eventTabLst, "a.anchor", sectionEventTabFunctions.setActive.bind(this));
+            commonAPIs.bindEventOnClick(GLOBAL_VAR.$btnMore, sectionEventBoxFunctions.renderProductList.bind(undefined, 2));
         },
+
         setActive: function (event) {
             event.stopPropagation();
             GLOBAL_VAR.$selectedCategory.removeClass("active");
@@ -121,18 +146,38 @@ var GLOBAL_VAR = {
             $eventTarget.addClass("active");
             GLOBAL_VAR.$selectedCategory = $eventTarget;
             GLOBAL_VAR.activeCategory = $eventTarget.closest(".item").data("category");
+            sectionEventBoxFunctions.removeListItem(GLOBAL_VAR.$lstEventBox);
+            sectionEventBoxFunctions.renderProductList(4);
+            // sectionEventTabFunctions.setActiveProductsCount();
         },
+
+        setActiveProductsCount: function () {
+            var count = 0;
+            // if (GLOBAL_VAR.activeCategory === 0) {
+            //     count = GLOBAL_VAR.productList.length;
+            // } else {
+            //     for (var i in GLOBAL_VAR.productList) {
+            //         count = ((GLOBAL_VAR.productList[i].categoryId === GLOBAL_VAR.activeCategory ) ? count+1 : count);
+            //     }
+            // }
+            var getCount = commonAPIs.ajax(undefined, API_ROOT_URL + "products/count", "json", "get", "json");
+            getCount.then(function (count) {
+                GLOBAL_VAR.$pEventLstTxt.text(count + "개");
+            });
+        },
+
         renderCategoryList: function () {
             var getCategories = commonAPIs.ajax(undefined, API_ROOT_URL + "categories/", "json", "get", "json");
             getCategories.then(function (categories) {
                 var defaultCategory = {
-                    id : 0,
-                    name : "전체"
+                    id: 0,
+                    name: "전체"
                 };
                 var addCategory = [defaultCategory];
                 sectionEventTabFunctions.appendElement(addCategory.concat(categories));
             })
         },
+
         appendElement: function (elements) {
             for (var i in elements) {
                 GLOBAL_VAR.$eventTabLst.append(sectionEventTabFunctions.categoryListElement(elements[i].id, elements[i].name));
@@ -141,6 +186,7 @@ var GLOBAL_VAR = {
             GLOBAL_VAR.$selectedCategory.addClass("active");
             $('ul.event_tab_lst>li:last-child').find("a.anchor").addClass("last");
         },
+
         categoryListElement: function (id, name) {
             var template = $('#categoryListTemplate').html();
             var templateScript = Handlebars.compile(template);
@@ -153,14 +199,16 @@ var GLOBAL_VAR = {
         }
     };
 
-    //head section
+//head section
     var headFunctions = {
         init: function () {
             this.bindClickEvent();
         },
+
         bindClickEvent: function () {
             commonAPIs.bindEventOnClick(GLOBAL_VAR.$headerClass, GLOBAL_VAR.lnkLogoClass, headFunctions.moveToLocation.bind(undefined, ROOT_URL));
         },
+
         moveToLocation: function (url) {
             document.location.href = url;
         }

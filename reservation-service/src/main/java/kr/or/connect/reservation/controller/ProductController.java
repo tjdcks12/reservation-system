@@ -1,6 +1,5 @@
 package kr.or.connect.reservation.controller;
 
-import kr.or.connect.reservation.domain.Product;
 import kr.or.connect.reservation.dto.ProductDto;
 import kr.or.connect.reservation.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +19,23 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping
-    public Collection<Product> getAllProducts() {
-        return productService.getAllProducts();
+    @GetMapping("/count")
+    public Integer getProductsCount() {
+        return productService.getProductsCount();
     }
 
     @GetMapping("/{offset}/{limit}")
-    public Collection<ProductDto> getProductsByOffset(
+    public Collection<ProductDto> getProducts(
             @PathVariable("offset") Integer offset,
             @PathVariable("limit") Integer limit) {
-        return productService.getProductsByOffset(offset, limit);
+        return productService.getProducts(offset, limit);
+    }
+
+    @GetMapping("/{category}/{offset}/{limit}")
+    public Collection<ProductDto> getProductsByCategory(
+            @PathVariable("category") Integer category,
+            @PathVariable("offset") Integer offset,
+            @PathVariable("limit") Integer limit) {
+        return productService.getProductsByCategory(category, offset, limit);
     }
 }

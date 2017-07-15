@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,15 +28,23 @@ public class ProductDao {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
-    public List<Product> selectAll() {
-        return jdbcTemplate.query(SELECT_ALL, rowMapper);
-    }
-
-    public List<ProductDto> selectByOffset(Integer offset, Integer limit) {
+    public List<ProductDto> selectAllLimit(Integer offset, Integer limit) {
         Map<String, Object> paramsMap = new HashMap<>();
         paramsMap.put("offset", offset);
         paramsMap.put("limit", limit);
+        return jdbcTemplate.query(SELECT_ALL_LIMIT, paramsMap, dtoRowMapper);
+    }
 
-        return jdbcTemplate.query(SELECT_BY_CATEGORY_ID, paramsMap, dtoRowMapper);
+    public List<ProductDto> selectByCategory(Integer category, Integer offset, Integer limit) {
+        Map<String, Object> paramsMap = new HashMap<>();
+        paramsMap.put("category", category);
+        paramsMap.put("offset", offset);
+        paramsMap.put("limit", limit);
+
+        return jdbcTemplate.query(SELECT_BY_CATEGORY, paramsMap, dtoRowMapper);
+    }
+
+    public Integer count() {
+        return jdbcTemplate.query(SELECT_ALL, dtoRowMapper).size();
     }
 }

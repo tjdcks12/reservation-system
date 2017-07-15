@@ -9,6 +9,7 @@ import java.util.List;
  * Created by ODOL on 2017. 7. 12..
  */
 public interface ProductService {
-    List<Product> getAllProducts();
-    List<ProductDto> getProductsByOffset(Integer offset, Integer limit);
+    List<ProductDto> getProducts(Integer offset, Integer limit);
+    List<ProductDto> getProductsByCategory(Integer category, Integer offset, Integer limit);
+    Integer getProductsCount();
 }
