@@ -191,8 +191,8 @@
     </li>
 </script>
 <script id="productListTemplate" type="text/x-handlebars-template">
-    <li class="item" data-category="{{id}}">
-        <a href="#" class="item_book">
+    <li class="item" data-category="{{categoryId}}">
+        <a href="#" class="item_book" data-productId="{{productId}}">
             <div class="item_preview"><img alt="{{imgAlt}}" class="img_thumb" src="{{imgSrc}}">
                 <span class="img_border"></span>
             </div>
@@ -206,6 +206,7 @@
         </a>
     </li>
 </script>
+<script src="../js/common.js"></script>
 <script src="../js/mainpage.js"></script>
 </body>
 

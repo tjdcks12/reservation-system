@@ -1,20 +1,26 @@
 package kr.or.connect.reservation.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by ODOL on 2017. 7. 12..
  */
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/")
 public class MainController {
-    @GetMapping
+    @GetMapping("/main")
     public String index() {
         System.out.println();
         return "mainpage";
+    }
+    @GetMapping("/detail/{id}")
+    public String detail(@PathVariable("id") Long id){
+        return "detail";
+    }
+
+    @GetMapping("/review/{productId}")
+    public String review(@PathVariable("prdocutId") Long id){
+        return "review";
     }
 }

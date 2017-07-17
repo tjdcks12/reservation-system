@@ -53,9 +53,9 @@ To change this template use File | Settings | File Templates.
 
         var categoryFunctions = {
             init: function () {
-                this.bindEvent();
+                this.bindClickEvent();
             },
-            bindEvent: function () {
+            bindClickEvent: function () {
                 $categoryListWrapper.on('click', '.delete',categoryFunctions.removeCategory);
             },
             removeCategory: function (event) {

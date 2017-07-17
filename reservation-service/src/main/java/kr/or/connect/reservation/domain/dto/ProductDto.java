@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    //"SELECT P.id, P.category_id, P.name, P.description, DI.place_name, F.file_name, F.save_file_name"
     private Long id;
     private Long categoryId;
     private String name;
