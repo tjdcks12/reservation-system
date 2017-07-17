@@ -37,9 +37,10 @@ public class CategoryController {
     }
 
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     @ResponseBody
-    public String delete(@PathVariable String id) {
+    public String delete(@PathVariable("id") String id) {
         categoryService.delete(Long.parseLong(id));
         List<Category> categoryList = categoryService.getCategories();
         return "ok";

@@ -69,9 +69,9 @@ var GLOBAL_VAR = {
             var url;
             var category = GLOBAL_VAR.activeCategory;
             if(category !== 0 ) {
-                url = API_ROOT_URL + "products/" + category + "/" + GLOBAL_VAR.offset + "/" +limit;
+                url = API_ROOT_URL + "products/" + category + "?offset=" + GLOBAL_VAR.offset + "&limit=" +limit;
             } else {
-                url  = API_ROOT_URL + "products/" + GLOBAL_VAR.offset + "/" +limit;
+                url  = API_ROOT_URL + "products?offset=" + GLOBAL_VAR.offset + "&limit=" +limit;
             }
             var getProducts = commonAPIModule.ajax(undefined, url, "json", "get", "json");
             getProducts.then(function (products) {
