@@ -5,7 +5,7 @@
     var $h1Logo = $('h1.logo');
     var $aLnkLogo = $('a.lnk_logo');
     var API_URL = $.GLOBAL_VAR.API_ROOT_URL + "details";
-    var PRODUCT_ID;
+    var productId;
     var PRODUCT_DATA;
     var REVIEW_DATA;
     var OFF_SET = 3;
@@ -15,8 +15,8 @@
             this.detailSectionTrigger();
         },
         detailSectionTrigger: function () {
-            PRODUCT_ID = $(location).attr("href").split("/")[4];
-            var getProductData = $.commonAPIModule.ajax(undefined, API_URL + "/" + PRODUCT_ID, "json", "get", "json");
+            productId = location.href.split("/")[4];
+            var getProductData = $.commonAPIModule.ajax(undefined, API_URL + "/" + productId, "json", "get", "json");
             getProductData.then(function (data) {
                 PRODUCT_DATA = data;
                 detailModule.init();
@@ -24,7 +24,7 @@
             });
         },
         reviewSectionTrigger: function () {
-            var getReviewData = $.commonAPIModule.ajax(undefined, API_URL + "/review/" + PRODUCT_ID, "json", "get", "json");
+            var getReviewData = $.commonAPIModule.ajax(undefined, API_URL + "/review/" + productId, "json", "get", "json");
             getReviewData.then(function (data) {
                 REVIEW_DATA = data;
                 reviewModule.init();
@@ -39,36 +39,37 @@
         renderReview: function () {
             var joinCount = REVIEW_DATA.length;
             $.GLOBAL_VAR.$divSectionReview.find('em.green').text(joinCount + "건");
-            if(joinCount <= OFF_SET) {
+            if (joinCount <= OFF_SET) {
                 $('a.btn_review_more').hide();
             }
             reviewModule.appendElement(joinCount);
         },
         appendElement: function (count) {
             var avg = 0;
-            for (var i = 0; i < REVIEW_DATA.length && i < OFF_SET ; i++) {
+            var reviewData = REVIEW_DATA;
+            for (var i = 0; i < reviewData.length && i < OFF_SET; i++) {
                 var $target = $.GLOBAL_VAR.$divSectionReview.find('ul.list_short_review');
                 var template = $('#shortReviewTemplate').html();
                 var content = {
-                    "imgSrc": REVIEW_DATA[i].saveFileName,
-                    "imgCount": REVIEW_DATA[i].count,
+                    "imgSrc": reviewData[i].saveFileName,
+                    "imgCount": reviewData[i].count,
                     "title": PRODUCT_DATA[0].name,
-                    "review": REVIEW_DATA[i].comment,
-                    "grade": REVIEW_DATA[i].score,
-                    "userId": REVIEW_DATA[i].usernames
+                    "review": reviewData[i].comment,
+                    "grade": reviewData[i].score,
+                    "userId": reviewData[i].usernames
                 }
                 var element = $.commonAPIModule.templeToElement(template, content);
                 $target.append(element);
-                if (REVIEW_DATA[i].saveFileName === null) {
+                if (reviewData[i].saveFileName === null) {
                     $('div.thumb_area').hide();
                 }
-                avg += REVIEW_DATA[i].score;
+                avg += reviewData[i].score;
             }
 
-            avg = avg/count;
-            var per = avg*20;
+            avg = avg / count;
+            var per = avg * 20;
             $('strong.text_value>span').text(avg);
-            $('span.graph_mask>em.graph_value').css("width", per+"%");
+            $('span.graph_mask>em.graph_value').css("width", per + "%");
         }
     }
 
@@ -85,12 +86,13 @@
             detailModule.appendElement();
         },
         appendElement: function () {
-            for (var i in PRODUCT_DATA) {
+            var productData = PRODUCT_DATA;
+            for (var i in productData) {
                 var $target = $.GLOBAL_VAR.$ulVisualImg;
                 var template = $('#visualTemplate').html();
                 var content = {
-                    "imgSrc": PRODUCT_DATA[i].saveFileName,
-                    "name": PRODUCT_DATA[i].name
+                    "imgSrc": productData[i].saveFileName,
+                    "name": productData[i].name
                 };
                 var element = $.commonAPIModule.templeToElement(template, content);
                 $target.append(element);
@@ -104,7 +106,7 @@
             }
         },
         bindEvent: function () {
-            $.commonAPIModule.bindEventOnClick($.GLOBAL_VAR.$divSectionStoreDetails, "a.bk_more", detailModule.toggleButton);
+            $.GLOBAL_VAR.$divSectionStoreDetails.on("click", "a.bk_more", detailModule.toggleButton);
         },
         toggleButton: function () {
             var $open = $('a._open');

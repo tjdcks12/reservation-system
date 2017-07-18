@@ -16,7 +16,7 @@
         $btnMyClass: $('a.btn_my'),
         $eventTabLst: $('ul.event_tab_lst'),
         $lstEventBox: $('ul.lst_event_box'),
-        $ulVisualImg : $('ul.visual_img'),
+        $ulVisualImg: $('ul.visual_img'),
         $pEventLstTxt: $('span.pink'),
         $btnMore: $('div.more>button'),
         $divSectionStoreDetails: $('div.section_store_details'),
@@ -48,7 +48,6 @@
             });
         },
         moveToLocation: function (url) {
-            console.log(url);
             document.location.href = url;
         },
         templeToElement: function (template, context) {

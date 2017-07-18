@@ -9,12 +9,12 @@
             this.renderProductList(4);
             this.bindClickEvent();
         },
-        bindClickEvent: function() {
-            $.commonAPIModule.bindEventOnClick($.GLOBAL_VAR.$lstEventBox, "li.item", productListModule.findLocation);
+        bindClickEvent: function () {
+            $.GLOBAL_VAR.$lstEventBox.on("click", "li.item", productListModule.findLocation);
 
         },
-        findLocation: function() {
-            var url = "/detail/" +$(this).find("a.item_book").data("productid");
+        findLocation: function () {
+            var url = "/detail/" + $(this).find("a.item_book").data("productid");
             $.commonAPIModule.moveToLocation(url);
         },
         renderProductList: function (limit) {
@@ -66,9 +66,8 @@
         },
 
         bindClickEvent: function () {
-            // commonAPIModule.bindEventOnClick(GLOBAL_VAR.$eventTabLst, "a.anchor", categoryModule.setActive.bind(this));
-            $.commonAPIModule.bindEventOnClick($.GLOBAL_VAR.$eventTabLst, "a.anchor", categoryModule.setActive.bind(this));
-            $.commonAPIModule.bindEventOnClick($.GLOBAL_VAR.$btnMore, productListModule.renderProductList.bind(undefined, 2));
+            $.GLOBAL_VAR.$eventTabLst.on("click", "a.anchor", categoryModule.setActive.bind(this));
+            $.GLOBAL_VAR.$btnMore.on("click", productListModule.renderProductList.bind(undefined, 2));
         },
 
         setActive: function (event) {
