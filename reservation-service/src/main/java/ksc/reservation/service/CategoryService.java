@@ -9,4 +9,5 @@ public interface CategoryService {
 	public int delete(int id);
 	public int update(Category category);
 	public Collection<Category> get();
+	public Collection<Category> get_by_id(int id);
 }
