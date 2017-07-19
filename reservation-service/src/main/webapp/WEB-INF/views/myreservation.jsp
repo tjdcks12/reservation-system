@@ -15,7 +15,11 @@
 
 <body>
     <div id="container">
-        <jsp:include page="header/header.jsp"/>
+        <div class="header">
+			<header class="header_tit">
+				<jsp:include page="header/header.jsp" />
+			</header>
+		</div>
         <div class="ct">
             <div class="section_my">
                 <!-- 예약 현황 -->

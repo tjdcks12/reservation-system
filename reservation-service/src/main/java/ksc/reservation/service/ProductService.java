@@ -9,4 +9,5 @@ public interface ProductService {
 	public Collection<ProductDto> getByCategory(int limit, int category);
 	public Integer getCount();
 	public Integer getCountByCategory(int categoryId);
+	
 }

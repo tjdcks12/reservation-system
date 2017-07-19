@@ -3,20 +3,28 @@ package ksc.reservation.dto;
 public class ProductDto {
 	int id;
 	int category_id;
+	int file_id;
 	String save_file_name;
+	String place_name;
 	int type;
 	String name;
 	String description;
-	String content;
-	String event;
 	
 	
-	public String getContent() {
-		return content;
+	
+	public String getPlace_name() {
+		return place_name;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setPlace_name(String place_name) {
+		this.place_name = place_name;
 	}
+	public int getFile_id() {
+		return file_id;
+	}
+	public void setFile_id(int file_id) {
+		this.file_id = file_id;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -53,12 +61,7 @@ public class ProductDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getEvent() {
-		return event;
-	}
-	public void setEvent(String event) {
-		this.event = event;
-	}
+	
 	
 	
 }

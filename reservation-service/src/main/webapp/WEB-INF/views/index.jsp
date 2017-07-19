@@ -14,7 +14,11 @@
 </head>
 <body>
 	<div id="container">
-		<jsp:include page="header/header.jsp" />
+		<div class="header">
+			<header class="header_tit">
+				<jsp:include page="header/header.jsp" />
+			</header>
+		</div>
 		<div class="event">
 			<div class="section_visual">
 				<div class="group_visual">
@@ -36,7 +40,7 @@
 						<div>
 							<div class="container_visual">
 								<!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 -->
-								<div class="rollingList">
+								<div class="rollingList" value="338">
 									<ul class="visual_img">
 										<li class="item"
 											style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
@@ -82,7 +86,8 @@
 			<div class="section_event_tab">
 				<ul class="event_tab_lst tab_lst_min">
 					<c:forEach var="category" items="${categories}" varStatus="status">
-						<li class="item" id="category#${category.id}" data-categoryId="${category.id}"><c:choose>
+						<li class="item" id="category#${category.id}"
+							data-categoryId="${category.id}"><c:choose>
 								<c:when test="${status.last}">
 									<a class="anchor last">
 								</c:when>
@@ -101,39 +106,43 @@
 					바로 예매 가능한 전시, 공연, 행사가 <span class="pink">40개</span> 있습니다
 				</p>
 				<div class="wrap_event_box">
-                    <!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
-                    <ul class="lst_event_box">
-                    </ul>
-                    
-                    <ul class="lst_event_box">
-                    </ul>
-                    <!-- 더보기 -->
-                    <div class="more">
-                        <button class="btn"><span>더보기</span></button>
-                    </div>
-                </div>
+					<!-- [D] lst_event_box 가 2컬럼으로 좌우로 나뉨, 더보기를 클릭할때마다 좌우 ul에 li가 추가됨 -->
+					<ul class="lst_event_box">
+					</ul>
+
+					<ul class="lst_event_box">
+					</ul>
+					<!-- 더보기 -->
+					<div class="more">
+						<button class="btn">
+							<span>더보기</span>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<footer>
-	<div class="gototop">
-		<a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span>
-		</a>
-	</div>
-	<div class="footer">
-		<p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불
-			등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
-		<span class="copyright">© NAVER Corp.</span>
-	</div>
+		<div class="gototop">
+			<a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span>
+			</a>
+		</div>
+		<div class="footer">
+			<p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및
+				환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
+			<span class="copyright">© NAVER Corp.</span>
+		</div>
 	</footer>
-	
-	
+
+
 </body>
-	
-	<jsp:include page="handlerbarsTemplate.jsp" flush="false"/>
-	<script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
-	<script src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
-	<script src="/resources/js/app.js"></script>
-	<script src="/resources/js/imageslide.js"></script>
+
+
+<script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>
+<jsp:include page="handlebars/productHandlebars.jsp" />
+<script src="/resources/js/node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="/resources/js/app.js"></script>
+<script src="/resources/js/imageslide.js"></script>
+
 </html>
 

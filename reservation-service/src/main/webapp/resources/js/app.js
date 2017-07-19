@@ -1,16 +1,9 @@
-(function(window) {
-  'use strict';
-
-  //window.$ = window.jQuery = require('jquery');
 
   var productBlock = $('.wrap_event_box');
   var productDetailBlock = $('.img_border');
   var categoryListBlock = $('.event_tab_lst');
   var countBlock = $('.pink');
   var moreBlock = $('.btn');
-
-
-
 
 
   var DataGetModule = (function() {
@@ -65,8 +58,11 @@
       var source = $('#item-template').html();
       var template = Handlebars.compile(source);
       $.each(res, function(i) {
+        
         var appendProduct = template(res[i]);
+
         if (i % 2 == 0) {
+
           productBlock.find('ul:first-child').append(appendProduct);
         } else {
           productBlock.find('ul:first-child+ul').append(appendProduct);
@@ -204,13 +200,3 @@
       });
     }
   })();
-
-
-
-
-
-
-
-
-
-})(window);

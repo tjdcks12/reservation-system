@@ -1,16 +1,19 @@
 package ksc.reservation.dto;
 
 public class DetailDto {
-	int product_id;
+	int id;
 	String name;
-	String content;
+	String description;
 	String event;
-	int flag;
-	public int getProduct_id() {
-		return product_id;
+	int saleFlag;
+	String tel;
+	String homepage;
+	String email;
+	public int getId() {
+		return id;
 	}
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -18,11 +21,11 @@ public class DetailDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getContent() {
-		return content;
+	public String getDescription() {
+		return description;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getEvent() {
 		return event;
@@ -30,12 +33,33 @@ public class DetailDto {
 	public void setEvent(String event) {
 		this.event = event;
 	}
-	public int getFlag() {
-		return flag;
+	public int getSaleFlag() {
+		return saleFlag;
 	}
-	public void setFlag(int flag) {
-		this.flag = flag;
+	public void setSaleFlag(int saleFlag) {
+		this.saleFlag = saleFlag;
 	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getHomepage() {
+		return homepage;
+	}
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+
 	
 	
 }
