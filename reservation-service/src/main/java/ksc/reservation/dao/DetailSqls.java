@@ -2,7 +2,7 @@ package ksc.reservation.dao;
 
 public class DetailSqls {
 	final static String SELECT_DETAIL = "SELECT a.id, a.name, a.description, a.event, a.sales_flag, b.tel, b.homepage, b.email from (SELECT * FROM reservation.product where id=:productId) a left join display_info b on a.id = b.product_id;";
-	final static String SELECT_COMMENT = "SELECT a.*, b.file_id FROM (select * from (select a.id, b.username, a.product_id, a.score, a.comment, a.create_date, a.modify_date from reservation_user_comment a left join users b on a.user_id = b.id)temp where product_id=:productId)a left join reservation_user_comment_image b on a.id = b.reservation_user_comment_id group by id order by id desc limit :start, :term";
+	final static String SELECT_COMMENT = "SELECT a.*, b.file_id FROM (select * from (select a.id, b.username, a.product_id, a.score, a.comment, a.create_date, a.modify_date from reservation_user_comment a left join users b on a.user_id = b.id)temp where product_id=:productId)a left join reservation_user_comment_image b on a.id = b.reservation_user_comment_id group by id order by create_date desc limit :start, :term";
 	final static String SELECT_COMMENT_COUNT = "SELECT count(*) FROM reservation.reservation_user_comment where product_id=:product_id";
 	final static String SELECT_COMMENT_SCORE = "SELECT avg(score) FROM reservation.reservation_user_comment where product_id=:product_id";
 

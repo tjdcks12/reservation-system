@@ -193,8 +193,8 @@
 							</div>
 							<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
 							<div class="bottom_common_path column2">
-								<a href="http://map.naver.com" class="btn_path"> <i class="fn fn-path-find2"></i>
-									<span>길찾기</span>
+								<a href="http://map.naver.com" class="btn_path"> <i
+									class="fn fn-path-find2"></i> <span>길찾기</span>
 								</a> <a hewf="#" class="btn_navigation before"> <i
 									class="fn fn-navigation2"></i> <span>내비게이션</span>
 								</a>
@@ -217,6 +217,12 @@
 		</div>
 	</footer>
 	<div id="photoviwer"></div>
+
+	<div id="pop">
+		<div>
+			<div id="close" style="width: 100px; margin: auto;">close</div>
+		</div>
+	</div>
 </body>
 
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>

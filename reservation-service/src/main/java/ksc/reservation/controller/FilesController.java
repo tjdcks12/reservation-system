@@ -86,7 +86,7 @@ public class FilesController {
 						filesService.addFile(fileDomain);
 						//insert product_image --> product_id param 받아와서 insert할때 매개변수로 사용
 					}
-					// insert하는거 있어야됨 Product_image
+					
 					else if (type.equals("comment")) {
 						fileDomain.setUser_id(2);//user_id 값 나중에 로그인한걸로 해야할듯
 						filesService.addFile(fileDomain);

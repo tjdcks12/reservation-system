@@ -19,7 +19,7 @@
 		<div class="info_area">
 			<div class="review_info">
 				<span class="grade">{{score}}.0</span> <span class="name">{{userName}}***</span> <span
-					class="date">{{cdate}} 방문</span>
+					class="date">{{createDate}} 방문</span>
 			</div>
 		</div>
 	</div>

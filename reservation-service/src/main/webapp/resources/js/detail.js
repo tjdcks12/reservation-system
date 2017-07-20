@@ -14,6 +14,8 @@
   var DETAIL_INFO_BLOCK = $('.section_info_tab');
   var limit = 0;
 
+
+
   //detail 가져오기
   var getData = (function() {
     $.ajax({
@@ -33,13 +35,19 @@
         $('.btn_goto_tel').attr('href', 'tel:' + res[0].tel);
         $('.btn_goto_mail').attr('href', 'mailto:' + res[0].email);
         $('.btn_goto_path').attr('href', 'http://map.naver.com');
+
+
         $('.bk_btn').on('click', function() {
           if (!res[0].flag)
             alert('매진');
         })
       }
     });
+
+
   })();
+
+
 
   var getProductImage = (function() {
     var source = $('#image-template').html();
@@ -73,6 +81,10 @@
       success: function(res) {
 
         $.each(res, function(i) {
+          var date = res[i].createDate;
+          var id = res[i].userName;
+          res[i].createDate = date.split(' ')[0];
+          res[i].userName = id.substr(0,2);
           promises.push(res[i]);
           var comment_number = res[i].id;
           //count가져오기
@@ -93,11 +105,9 @@
       }
     })
   }
-
   //이부분 어떻게 개선할지?.. 어떻게 모듈화?..
   getComment();
   limit++;
-
 
   $('.btn_review_more').on('click', function(e) {
     e.preventDefault();
@@ -106,6 +116,11 @@
   });
 
 
+
+  $('.thumb_area').on('click', function(){
+    alert("하하");
+    window.open(src, "newWin", "width="+screen.availWidth+",height="+screen.availHeight)
+  });
 
   //score 가져오기
   var getScore = (function() {
@@ -175,6 +190,7 @@
 
   var getPathDetail = (function() {
     var STORE_BLOCK = $('.store_info');
+    var DETAIL_BLOCK = $('.detail_location');
 
     $.ajax({
         url: '/api/detail/' + DETAIL_NUMBER + '/displayInfo',
@@ -185,11 +201,17 @@
           STORE_BLOCK.find('.addr_old_detail').text(res[0].place_street);
           STORE_BLOCK.find('.addr_detail').text(res[0].place_name);
           STORE_BLOCK.find('.item_rt').text(res[0].tel);
-          STORE_BLOCK.find('.store_location').attr('href', 'http://map.naver.com/?query='+res[0].place_street);
+          DETAIL_BLOCK.find('.store_location').attr('href', 'http://map.naver.com/?query='+res[0].place_street);
 
         }
     });
   })();
+  $('.btn_goto_share').on('click', function share() {
+    var url = encodeURI(encodeURIComponent(location.href));
+    var title = encodeURI(detail_product_name);
+    var shareURL = "http://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
+    document.location = shareURL;
+  });
 
 
 //더보기 onClick
@@ -204,5 +226,13 @@ if ((DETAIL_CONTENT_BLOCK).hasClass('close3')) {
   DETAIL_CONTENT_BLOCK.addClass('close3');
 }
 });
+
+$(document).ready(function() {
+      $('#close').click(function() {
+        $('#pop').hide();
+      });
+    });
+
+
 
 })();

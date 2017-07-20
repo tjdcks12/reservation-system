@@ -6,8 +6,8 @@ public class CommentByProductDto {
 	String userName;
 	float score;
 	String comment;
-	String cdate;
-	String mdate;
+	String createDate;
+	String modifyDate;
 	Integer file_id;
 	public Integer getId() {
 		return id;
@@ -40,17 +40,18 @@ public class CommentByProductDto {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public String getCdate() {
-		return cdate;
+	
+	public String getCreateDate() {
+		return createDate;
 	}
-	public void setCdate(String cdate) {
-		this.cdate = cdate;
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
-	public String getMdate() {
-		return mdate;
+	public String getModifyDate() {
+		return modifyDate;
 	}
-	public void setMdate(String mdate) {
-		this.mdate = mdate;
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 	public Integer getFile_id() {
 		return file_id;
