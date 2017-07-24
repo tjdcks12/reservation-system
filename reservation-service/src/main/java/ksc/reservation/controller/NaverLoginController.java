@@ -86,6 +86,7 @@ public class NaverLoginController {
 			System.out.println("이미 존재하는 아이디 입니다");
 		}
 		
+		session.setAttribute("userId", naverLoginService.getUserId(Integer.parseInt(map.get("id"))));
 		session.setAttribute("user", map); // 세션에 파싱된 데이터(apiResult)들 저장
 		//db에 insert 비교
 		

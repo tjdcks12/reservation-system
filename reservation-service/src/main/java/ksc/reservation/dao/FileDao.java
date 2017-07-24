@@ -40,30 +40,30 @@ public class FileDao {
 		return insertAction.executeAndReturnKey(params).intValue();
 	}
 	
-	public Collection<Product> select_all_product(){
+	public Collection<Product> selectAllProduct(){
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.query(FileSqls.SELECT_ALL_PRODUCT, params, productRowMapper);
 	}
 	
-	public Collection<ImageFileDto> select_all_product_image_list(){
+	public Collection<ImageFileDto> selectAllProductImageList(){
 		Map<String, Object> params = Collections.emptyMap();
 		return jdbc.query(FileSqls.SELECT_ALL_IMAGE_LIST, params, productImageRowMapper);
 	}
 	
-	public Collection<ImageFileDto> select_product_image_by_product(int product_id){
+	public Collection<ImageFileDto> selectProductImageByProduct(int product_id){
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", product_id);
 		return jdbc.query(FileSqls.SELECT_IMAGE_LIST_BY_PRODUCT, params, productImageRowMapper);
 	}
 	
-	public Collection<FileByProductDto> select_file_by_product(int product_id, int file_id){
+	public Collection<FileByProductDto> selectFileByProduct(int product_id, int file_id){
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", product_id);
 		params.put("fileId", file_id);
 		return jdbc.query(FileSqls.SELECT_SAVE_FILE_NAME_BY_PRODUCT, params, fileRowMapper);
 	}
 	
-	public Collection<FileByProductDto> select_file_by_comment(int comment_id, int file_id){
+	public Collection<FileByProductDto> selectFileByComment(int comment_id, int file_id){
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", comment_id);
 		params.put("fileId", file_id);

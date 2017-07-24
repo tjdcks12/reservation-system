@@ -12,5 +12,10 @@ public class ProductDetailPageController {
 	public String ProductDetailPage() {
 		return "detail";
 	}
+	
+	@GetMapping("/items")
+	public String ReservePage() {
+		return "reserve";
+	}
 
 }

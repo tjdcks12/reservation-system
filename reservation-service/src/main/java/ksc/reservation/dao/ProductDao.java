@@ -24,14 +24,14 @@ public class ProductDao {
 	}
 	
 	
-	public Collection<ProductDto> select_product(int start, int term) {
+	public Collection<ProductDto> selectProduct(int start, int term) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("start", start);
 		params.put("term", term);
 		return jdbc.query(ProductSqls.SELECT_PRODUCT, params, rowMapper);
 	}
 	
-	public Collection<ProductDto> select_product_by_category(int categoryId, int start, int term){
+	public Collection<ProductDto> selectProductByCategory(int categoryId, int start, int term){
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryId", categoryId);
 		params.put("start", start);

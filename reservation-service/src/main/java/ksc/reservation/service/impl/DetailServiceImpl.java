@@ -23,36 +23,36 @@ public class DetailServiceImpl implements DetailService{
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<DetailDto> get(int id) {
-		return detailDao.select_detail(id);
+		return detailDao.selectDetail(id);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<CommentByProductDto> getComment(int id, int start){
 		int term = 3;
-		return detailDao.select_user_comment_by_product(id, start, term);
+		return detailDao.selectUserCommentByProductId(id, start, term);
 	}
 	@Override
 	@Transactional(readOnly = true)
 	public Integer getCount(int id) {
-		return detailDao.select_comment_count(id);
+		return detailDao.selectCommentCount(id);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public float getScore(int id) {
-		return detailDao.select_comment_score(id);
+		return detailDao.selectCommentScore(id);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<ProductImage> getProductImageId(int id){
-		return detailDao.select_product_image_id(id);
+		return detailDao.selectProductImageId(id);
 	}
 	@Override
 	@Transactional(readOnly = true)
 	public Integer getProductImageCount(int id) {
-		return detailDao.select_product_image_count(id);
+		return detailDao.selectProductImageCount(id);
 	}
 	@Override
 	@Transactional(readOnly = true)
@@ -62,7 +62,7 @@ public class DetailServiceImpl implements DetailService{
 	@Override
 	@Transactional (readOnly = true)
 	public Integer getCommentImageCount(int productId, int commentId) {
-		return detailDao.select_comment_image_count(productId, commentId);
+		return detailDao.selectCommentImageCounts(productId, commentId);
 	}
 	@Override
 	@Transactional (readOnly = true)	

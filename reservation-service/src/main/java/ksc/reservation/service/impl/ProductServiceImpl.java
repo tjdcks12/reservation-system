@@ -20,14 +20,14 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional(readOnly = true)
 	public Collection<ProductDto> get(int start){ 
 		int term = 10;
-		return productDao.select_product(start, term);
+		return productDao.selectProduct(start, term);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<ProductDto> getByCategory(int start, int category){
 		int term = 10;
-		return productDao.select_product_by_category(category, start, term);
+		return productDao.selectProductByCategory(category, start, term);
 	}
 	
 	@Override

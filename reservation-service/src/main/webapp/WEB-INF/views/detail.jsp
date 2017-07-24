@@ -12,6 +12,7 @@
 
 <title>네이버 예약</title>
 <link href="/resources/css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -96,10 +97,12 @@
 					</div>
 				</div>
 				<div class="section_btn">
+				<a href="/detail/items?productId=${param.productid}">
 					<button type="button" class="bk_btn">
 						<i class="fn fn-nbooking-calender2"></i> <span>예매하기</span>
 					</button>
 				</div>
+				</a>
 				<div class="section_review_list">
 					<div class="review_box">
 						<h3 class="title_h3">예매자 한줄평</h3>
@@ -216,13 +219,16 @@
 			<span class="copyright">© NAVER Corp.</span>
 		</div>
 	</footer>
-	<div id="photoviwer"></div>
-
-	<div id="pop">
-		<div>
-			<div id="close" style="width: 100px; margin: auto;">close</div>
+	<!-- 
+	<div id="photoviwer">
+		<div class="pop_cont">
+			<img src="img/img01.jpg" width="400" height="331" /> <a href="#"
+				class="btn_close">X close</a>
 		</div>
 	</div>
+	<a href="#" class="btn_open">
+		<div id="wrap"></div>
+		 -->
 </body>
 
 <script src="/resources/js/node_modules/jquery/dist/jquery.min.js"></script>

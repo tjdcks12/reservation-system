@@ -28,7 +28,6 @@ public class NaverLoginBO {
 	
 	/* 네아로 인증  URL 생성  Method */
 	public String getAuthorizationUrl(HttpSession session) {
-
 		/* 세션 유효성 검증을 위하여 난수를 생성 */
 		String state = generateRandomString();
 		/* 생성한 난수 값을 session에 저장 */
@@ -93,6 +92,7 @@ public class NaverLoginBO {
 		Response response = request.send();
 		return response.getBody();
 	}
+	
 
 	
 }

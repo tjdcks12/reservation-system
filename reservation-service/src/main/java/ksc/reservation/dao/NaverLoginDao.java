@@ -40,4 +40,10 @@ public class NaverLoginDao {
 			return false;
 		}
 	}
+	
+	public int getUserId(int snsId) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("snsId", snsId);
+		return jdbc.queryForObject(NaverLoginSqls.SELECT_USER_ID_BY_SNSID, params, Integer.class);
+	}
 }

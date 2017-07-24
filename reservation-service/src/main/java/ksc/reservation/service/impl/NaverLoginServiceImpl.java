@@ -28,4 +28,10 @@ public class NaverLoginServiceImpl implements NaverLoginService{
 	public boolean duplicateId(int snsId) {
 		return naverLoginDao.duplicateCheck(snsId);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public int getUserId(int snsId) {
+		return naverLoginDao.getUserId(snsId);
+	}
 }

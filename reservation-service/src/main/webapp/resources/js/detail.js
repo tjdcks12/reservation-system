@@ -38,7 +38,7 @@
 
 
         $('.bk_btn').on('click', function() {
-          if (!res[0].flag)
+          if (res[0].saleFlag)
             alert('매진');
         })
       }
@@ -228,10 +228,24 @@ if ((DETAIL_CONTENT_BLOCK).hasClass('close3')) {
 });
 
 $(document).ready(function() {
-      $('#close').click(function() {
-        $('#pop').hide();
-      });
-    });
+ popConfig();
+});
+
+function popConfig(){
+ $(".btn_open").click(layerOpen);
+ $(".btn_close").click(layerClose);
+}
+function layerOpen(){
+ $("#layer_pop").css("display","block");
+ var tx = ($(window).width()-$("#layer_pop .pop_cont").width())/2;
+ var ty = ($(window).height()-$("#layer_pop .pop_cont").height())/2;
+ $("#layer_pop .pop_cont").css({left:tx+"px",top:ty+"px"});
+ $("body").css("overflow","hidden");
+}
+function layerClose(){
+ $("#layer_pop").css("display","none");
+ $("body").css("overflow","auto");
+}
 
 
 

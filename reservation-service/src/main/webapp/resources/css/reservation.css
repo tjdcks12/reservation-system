@@ -12596,3 +12596,9 @@ body.biz10 .section_item_details .item_details {
     height: 20px;
     background-position: -93px -24.5px;
 }
+
+#wrap{width:100%; height:2400px; background:url('img/img03.jpg') no-repeat center top;}
+
+#photoviwer{position:fixed; width:100%; height:2000px; top:0px; left:0px; background:url('img/dark_bg.png'); display:none;}
+#photoviwer .pop_cont{position:absolute;}
+.btn_close{display:block; font-weight:bold; color:#FFFFFF; padding:3px; text-align:right;}

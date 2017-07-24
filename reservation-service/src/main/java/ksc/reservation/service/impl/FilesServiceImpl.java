@@ -21,19 +21,19 @@ public class FilesServiceImpl implements FilesService{
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<Product> getProductList(){
-		return fileDao.select_all_product();
+		return fileDao.selectAllProduct();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<ImageFileDto> getAllProductImageList(){
-		return fileDao.select_all_product_image_list();
+		return fileDao.selectAllProductImageList();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<ImageFileDto> getProductImageByProductId(int productId){
-		return fileDao.select_product_image_by_product(productId);
+		return fileDao.selectProductImageByProduct(productId);
 	}
 	
 	@Override
@@ -47,12 +47,12 @@ public class FilesServiceImpl implements FilesService{
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<FileByProductDto> getFileByProductId(int productId, int fileId) {
-		return fileDao.select_file_by_product(productId, fileId);
+		return fileDao.selectFileByProduct(productId, fileId);
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<FileByProductDto> getFileByCommentId(int commentId, int fileId){
-		return fileDao.select_file_by_comment(commentId, fileId);
+		return fileDao.selectFileByComment(commentId, fileId);
 	}
 }
