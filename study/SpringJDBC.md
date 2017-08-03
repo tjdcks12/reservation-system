@@ -1,3 +1,5 @@
+![springJDBC](springJDBC.jpg)
+
 1. Spring JDBC를 하기 위한 준비과정
 
 - RootApplicationContextConfig 에서 dao에 대한 ComponentScan, DB설정을 가지고 있는 class를 import한다.
