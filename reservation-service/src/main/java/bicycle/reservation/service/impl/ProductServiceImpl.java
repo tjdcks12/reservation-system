@@ -8,12 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Transactional(readOnly = true)
-    public List<Map<String, Object>> getProduct(){
-
-        return
+    public List<Map<String, Object>> getProduct() {
+        return null;
     }
 
 }
