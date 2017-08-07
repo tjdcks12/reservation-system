@@ -23,20 +23,20 @@ public class DbConfig {
 	private String driverClassName;
 	@Value("${spring.datasource.username}")
 	private String username;
-	@Value("${spring.datasource.url")
+	@Value("${spring.datasource.url}")
 	private String url;
 	@Value("${spring.datasource.password}")
 	private String password;
-	@Value("${spring.datasource.max-pool-size")
+	@Value("${spring.datasource.max-pool-size}")
 	private int maxPoolSize;
-	@Value("${spring.datasource.minimum-idle")
+	@Value("${spring.datasource.minimum-idle}")
 	private int minimumIdle;
-	@Value("${spring.datasource.max-wait-millis")
+	@Value("${spring.datasource.max-wait-millis}")
 	private int maxWaitMillis;
-	@Value("${spring.datasource.max-idle")
+	@Value("${spring.datasource.max-idle}")
 	private int maxIdle;
 	
-	@Bean(destroyMethod = "shutdown")
+	@Bean
 	public DataSource dataSource() {
 		HikariDataSource dataSource = new HikariDataSource();
 		dataSource.setDriverClassName(driverClassName);
@@ -45,7 +45,7 @@ public class DbConfig {
 		dataSource.setJdbcUrl(url);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
-		logger.debug("=========init ...... DataSource() in production mode!!=======");
+		logger.info("=========init ...... DataSource() in production mode!!=======");
 		return dataSource;
 	}
 	
