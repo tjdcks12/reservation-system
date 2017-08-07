@@ -13,7 +13,7 @@ local.properties
 .loadpath
 .recommenders
 .DS_Store
-application.properties
+*.properties
 
 # Eclipse Core
 .project
