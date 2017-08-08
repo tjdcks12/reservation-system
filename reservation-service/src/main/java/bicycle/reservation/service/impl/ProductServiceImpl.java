@@ -1,6 +1,10 @@
 package bicycle.reservation.service.impl;
 
+import bicycle.reservation.dao.Impl.ProductDaoImpl;
+import bicycle.reservation.dao.ProductDao;
+import bicycle.reservation.model.dto.ProductDto;
 import bicycle.reservation.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,12 +13,11 @@ import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    @Autowired
+    ProductDao productDao;
 
-    @Transactional(readOnly = true)
-    public List<Map<String, Object>> getProduct() {
-        return null;
+    @Override
+    public List<ProductDto> getProduct(Integer page, Integer count) {
+        return productDao.selectProducDtoInPage(page, count);
     }
-
 }
-
-

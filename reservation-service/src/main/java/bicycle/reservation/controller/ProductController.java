@@ -14,8 +14,7 @@ public class ProductController {
     ProductServiceImpl productService;
 
     @GetMapping
-    public ModelAndView mainPage(){
-
+    public ModelAndView mainPage() {
         return new ModelAndView("mainpage");
     }
 

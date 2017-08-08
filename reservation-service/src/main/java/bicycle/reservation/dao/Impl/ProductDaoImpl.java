@@ -27,6 +27,7 @@ public class ProductDaoImpl implements ProductDao {
         this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("product").usingGeneratedKeyColumns("id");
     }
 
+    @Override
     public List<ProductDto> selectProducDtoInPage(Integer page, Integer count) {
         Map<String, Object> params = new HashMap<>();
         params.put("page", page);

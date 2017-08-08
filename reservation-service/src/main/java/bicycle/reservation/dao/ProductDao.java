@@ -1,6 +1,7 @@
 package bicycle.reservation.dao;
 
 import bicycle.reservation.model.dto.ProductDto;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

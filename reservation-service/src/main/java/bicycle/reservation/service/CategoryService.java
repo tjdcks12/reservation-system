@@ -1,12 +1,15 @@
 package bicycle.reservation.service;
 
-import bicycle.reservation.model.dto.ProductDto;
+import bicycle.reservation.model.domain.Category;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface ProductService {
+
+public interface CategoryService {
     @Transactional(readOnly = true)
-    public List<ProductDto> getProduct(Integer page, Integer count);
+    List<Category> getCategory();
+    @Transactional(readOnly = false)
+    Category insertCategory(Category category);
 }
