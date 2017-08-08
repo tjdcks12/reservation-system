@@ -5,6 +5,15 @@ public class ProductDto {
     private Integer fileId;
     private String name;
     private String description;
+    private String placeName;
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
 
     public Integer getProductId() {
         return productId;
