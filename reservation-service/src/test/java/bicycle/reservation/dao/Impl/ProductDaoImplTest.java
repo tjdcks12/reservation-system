@@ -48,4 +48,9 @@ public class ProductDaoImplTest {
         assertThat(productDetail.getTel(), is("02-3143-4360"));
 
     }
+    @Test
+    public void getAllProductsCount(){
+        Integer allProductCounts = productDao.selectAllProductsCount();
+        assertNotNull(allProductCounts);
+    }
 }

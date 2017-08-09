@@ -38,4 +38,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetailDto getProductDetailByProductId(Integer productId) {
         return productDao.selectProductDetailDtoByProductId(productId);
     }
+
+    @Override
+    public Integer getProductsCountByCategoryId(Integer categoryId) {
+        if(categoryId == 1){
+            return productDao.selectAllProductsCount();
+        }
+        return productDao.selectProductsCountByCategoryId(categoryId);
+    }
 }

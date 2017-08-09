@@ -12,5 +12,7 @@ public interface ProductService {
 
     public ProductDetailDto getProductDetailByProductId(Integer productId);
 
+    public Integer getProductsCountByCategoryId(Integer categoryId);
+
 
 }

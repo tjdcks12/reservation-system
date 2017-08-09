@@ -20,6 +20,8 @@ public class ProductSqls {
     public static final String SELECT_ALL_PRODUCTS_COUNT =
             "SELECT count(*)\n" +
                     "FROM reservation.product";
-    
+    public static final String SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID =
+            "SELECT count(*)\n" +
+                    "FROM reservation.category where id= :id";
 
 }

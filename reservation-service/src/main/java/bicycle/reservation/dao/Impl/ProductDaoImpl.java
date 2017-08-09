@@ -77,4 +77,29 @@ public class ProductDaoImpl implements ProductDao {
 
     }
 
+    @Override
+    public Integer selectAllProductsCount() {
+        Map<String, Object> params = new HashMap<>();
+        Integer productsCount = null;
+        try {
+            productsCount = jdbc.queryForObject(ProductSqls.SELECT_ALL_PRODUCTS_COUNT, params, Integer.class);
+        } catch (Exception e) {
+            throw new CustomException();
+        }
+        return productsCount;
+    }
+
+    @Override
+    public Integer selectProductsCountByCategoryId(Integer categoryId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", categoryId);
+        Integer productsCount = null;
+        try {
+            productsCount = jdbc.queryForObject(ProductSqls.SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID, params, Integer.class);
+        } catch (Exception e) {
+            throw new CustomException();
+        }
+        return productsCount;
+    }
+
 }

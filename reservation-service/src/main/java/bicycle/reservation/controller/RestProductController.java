@@ -23,4 +23,9 @@ public class RestProductController {
         return productService.getProduct(page,categoryId);
     }
 
+    @GetMapping("/categories/{categoryId}/count")
+    public Integer getProductsCountByCategoryId(@PathVariable("categoryId") Integer categoryId){
+        return productService.getProductsCountByCategoryId(categoryId);
+    }
+
 }
