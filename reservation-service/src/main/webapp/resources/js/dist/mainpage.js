@@ -69,7 +69,7 @@
 
 __webpack_require__(1);
 __webpack_require__(2);
-var CategoryList = __webpack_require__(4);
+var CategoryList = __webpack_require__(3);
 
 var categoryList = new CategoryList($('.event_tab_lst'));
 
@@ -16684,6 +16684,56 @@ eg.module("infiniteGrid", ["jQuery", eg, window, document], function($, ns, glob
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var extend = __webpack_require__(4);
+var ajaxCall = __webpack_require__(6);
+//var productTempleate = require('./handlebars-templates/product-template.html');
+module.exports = extend(eg.Component, {
+
+    init: function ($element) {
+        this.countData = {};
+        this.$categoryBlock = $element;
+        this.$anchor = $('.anchor.active');
+        this.$categoryBlock.on('click', this.toggleCategory.bind(this));
+    },
+    toggleCategory: function (e) {
+        var $x = $(e.target).closest('.anchor');
+        var categoryId;
+        if ($x.hasClass('anchor')) {
+            this.$anchor.toggleClass('active', false);
+            $x.toggleClass('active', true);
+            this.$anchor = $x;
+            categoryId = $x.closest('.item').data('category');
+            this.ajaxCall("/api/products/categories/"+categoryId+"/count");
+            //var new ajaxCall();
+        }
+
+    },
+    ajaxCall: function(url) {
+        var count = this.countData[url];
+        if (count) {
+            $('.pink').text(count+"개");
+        } else {
+            var ajaxData = new ajaxCall({url:url});
+
+            ajaxData.ajax(this.foo);
+            // this.countData[url] = data;
+            //
+            // $('.pink').text(data+"개");
+
+        }
+    },
+    foo: function(data){
+        console.log(data);
+    }
+
+
+});
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = function extend(superClass, def) {
@@ -16711,26 +16761,31 @@ module.exports = function extend(superClass, def) {
 };
 
 /***/ }),
-/* 4 */
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var extend = __webpack_require__(3);
+var extend = __webpack_require__(4);
 module.exports = extend(eg.Component, {
-    init: function ($element) {
-        this.$categoryBlock = $element;
-        this.$anchor = $('.anchor.active');
-        this.$categoryBlock.on('click', this.toggleCategory.bind(this));
-    },
-    toggleCategory: function (e) {
-        var $x = $(e.target).closest('.anchor');
-        if ($x.hasClass('anchor')) {
-            this.$anchor.toggleClass('active', false);
-            $x.toggleClass('active', true);
-            this.$anchor = $x;
-        }
-    }
-});
 
+    init: function (params) {
+        this.obj = {};
+        Object.assign(this.obj,
+            this.options = Object.assign({}, {
+                method: 'GET',
+                url: null,
+                contentType: "applicationJSON",
+                data: null
+
+            }), params);
+
+    },
+    ajax: function(foo){
+        console.log(this.obj);
+        $.ajax(this.obj).then(foo);
+    }
+
+});
 
 /***/ })
 /******/ ]);

@@ -26,6 +26,7 @@ public class ProductController {
     public ModelAndView mainPage(ModelAndView modelAndView) {
         modelAndView.setViewName("mainpage");
         modelAndView.addObject("categories",categoryService.getCategory());
+        modelAndView.addObject("productCount",productService.getProductsCountByCategoryId(1));
         return modelAndView;
     }
 

@@ -92,7 +92,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Integer selectProductsCountByCategoryId(Integer categoryId) {
         Map<String, Object> params = new HashMap<>();
-        params.put("id", categoryId);
+        params.put("categoryId", categoryId);
         Integer productsCount = null;
         try {
             productsCount = jdbc.queryForObject(ProductSqls.SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID, params, Integer.class);

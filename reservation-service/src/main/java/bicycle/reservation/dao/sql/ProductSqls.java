@@ -22,6 +22,6 @@ public class ProductSqls {
                     "FROM reservation.product";
     public static final String SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID =
             "SELECT count(*)\n" +
-                    "FROM reservation.category where id= :id";
+                    "FROM reservation.product where category_id= :categoryId";
 
 }
