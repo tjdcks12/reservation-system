@@ -214,7 +214,7 @@
 </footer>
 
 <script src='http://code.jquery.com/jquery-latest.min.js'></script>
-<script src="/resources/js/dist/mainpageApp.js"></script>
+<script src="/resources/js/dist/mainpage.js"></script>
 </body>
 
 </html>

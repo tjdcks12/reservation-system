@@ -60,23 +60,54 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports) {
+
+module.exports = function extend(superClass, def) {
+    var extendClass = function extendClass() {
+        // Call a parent constructor
+        superClass.apply(this, arguments);
+
+        // Call a child constructor
+        if (typeof def.init === "function") {
+            def.init.apply(this, arguments);
+        }
+    };
+
+    var ExtProto = function() {};
+    ExtProto.prototype = superClass.prototype;
+
+    var extProto = new ExtProto();
+    for (var i in def) {
+        extProto[i] = def[i];
+    }
+    extProto.constructor = extendClass;
+    extendClass.prototype = extProto;
+
+    return extendClass;
+};
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
 __webpack_require__(2);
-var extend = __webpack_require__(3);
+__webpack_require__(3);
+var extend = __webpack_require__(0);
 var categoryList = __webpack_require__(4);
+console.log(extend);
 console.log(categoryList());
 console.log('hello world');
 alert('메롱');
 
+
+
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10336,7 +10367,7 @@ return jQuery;
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16681,34 +16712,6 @@ eg.module("infiniteGrid", ["jQuery", eg, window, document], function($, ns, glob
  * @see eg.InfiniteGrid#event:prepend
  */
 
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = function extend(superClass, def) {
-    var extendClass = function extendClass() {
-        // Call a parent constructor
-        superClass.apply(this, arguments);
-
-        // Call a child constructor
-        if (typeof def.init === "function") {
-            def.init.apply(this, arguments);
-        }
-    };
-
-    var ExtProto = function() {};
-    ExtProto.prototype = superClass.prototype;
-
-    var extProto = new ExtProto();
-    for (var i in def) {
-        extProto[i] = def[i];
-    }
-    extProto.constructor = extendClass;
-    extendClass.prototype = extProto;
-
-    return extendClass;
-};
 
 /***/ }),
 /* 4 */
