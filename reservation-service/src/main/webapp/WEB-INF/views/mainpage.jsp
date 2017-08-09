@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -89,17 +89,17 @@
                 <c:forEach var="category" items="${categories}" varStatus="status">
                     <li class="item" data-category="${category.id}">
                         <c:choose>
-                            <c:when test="${status.first}">
-                                <a class="anchor active">
+                        <c:when test="${status.first}">
+                        <a class="anchor active">
                             </c:when>
                             <c:when test="${status.last}">
-                                <a class="anchor last">
-                            </c:when>
-                            <c:otherwise>
+                            <a class="anchor last">
+                                </c:when>
+                                <c:otherwise>
                                 <a class="anchor">
-                            </c:otherwise>
-                        </c:choose>
-                        <span>${category.name}</span> </a>
+                                    </c:otherwise>
+                                    </c:choose>
+                                    <span>${category.name}</span> </a>
                     </li>
                 </c:forEach>
 
