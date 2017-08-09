@@ -136,6 +136,7 @@ target
 
 # for js
 node_modules/
+js/dist/
 
 
 
