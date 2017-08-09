@@ -23,6 +23,7 @@ public class ProductDaoImpl implements ProductDao {
     private SimpleJdbcInsert insertAction;
     private RowMapper<ProductDto> productDtoRowMapper = BeanPropertyRowMapper.newInstance(ProductDto.class);
     private RowMapper<ProductDetailDto> productDetailDtoRowMapper = BeanPropertyRowMapper.newInstance(ProductDetailDto.class);
+
     public ProductDaoImpl(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
         this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("product").usingGeneratedKeyColumns("id");
@@ -36,6 +37,22 @@ public class ProductDaoImpl implements ProductDao {
         List<ProductDto> products = null;
         try {
             products = jdbc.query(ProductSqls.SELECT_PRODUCTDTO_IN_PAGE, params, productDtoRowMapper);
+        } catch (DataAccessException e) {
+            //에러 처리
+            throw new CustomException();
+        }
+        return products;
+    }
+
+    @Override
+    public List<ProductDto> selectProducDtoInPageByCategoryId(Integer page, Integer count, Integer categoryId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("page", page);
+        params.put("count", count);
+        params.put("categoryId", categoryId);
+        List<ProductDto> products = null;
+        try {
+            products = jdbc.query(ProductSqls.SELECT_PRODUCTDTO_IN_PAGE_BY_CATEGORYID, params, productDtoRowMapper);
         } catch (DataAccessException e) {
             //에러 처리
             throw new CustomException();

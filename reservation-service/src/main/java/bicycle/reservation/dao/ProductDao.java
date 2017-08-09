@@ -9,5 +9,7 @@ import java.util.List;
 public interface ProductDao {
     List<ProductDto> selectProducDtoInPage(Integer page, Integer count);
 
+    List<ProductDto> selectProducDtoInPageByCategoryId(Integer page, Integer count, Integer categoryId);
+
     ProductDetailDto selectProductDetailDtoByProductId(Integer productId);
 }

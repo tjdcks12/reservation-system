@@ -1,0 +1,25 @@
+{
+  "name": "bicycle",
+  "version": "1.0.0",
+  "description": "reservation-by-bicycle",
+  "main": "mainpage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjdcks12/reservation-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjdcks12/reservation-system/issues"
+  },
+  "homepage": "https://github.com/tjdcks12/reservation-system#readme",
+  "devDependencies": {
+    "egjs": "^1.5.0",
+    "handlebars": "^4.0.10",
+    "handlebars-loader": "^1.5.0",
+    "jquery": "^3.2.1"
+  }
+}

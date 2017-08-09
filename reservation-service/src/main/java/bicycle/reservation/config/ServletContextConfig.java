@@ -17,11 +17,11 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 // 자동으로 webMvcConfigurationSupport 클래스가 자동으로 빈으로 등록된다. addResourceHandlers이용.
 @EnableWebMvc
-@PropertySource("classpath:/application.properties")
 // dispatcherServlet단에서 사용되는 controller를 주입받는다. RootApplication에서 dao와 service를
 // 주입받은 상태이므로 controller가 의존하는것들에 대해서 사용가능하다.
 @ComponentScan(basePackages = { "bicycle.reservation.controller" })
 public class ServletContextConfig extends WebMvcConfigurerAdapter {
+
 	@Value("${app.file.max.size}")
 	private int maxFileSize;
 

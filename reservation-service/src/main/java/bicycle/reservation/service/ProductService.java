@@ -8,10 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface ProductService {
-    @Transactional(readOnly = true)
-    public List<ProductDto> getProduct(Integer page, Integer count);
+    public List<ProductDto> getProduct(Integer page, Integer categoryId);
 
-    @Transactional(readOnly = true)
     public ProductDetailDto getProductDetailByProductId(Integer productId);
 
 
