@@ -8,7 +8,7 @@ public class File {
     private Date modifyDate;
     private Integer id;
     private String fileName;
-    private Integer fileLength;
+    private Long fileLength;
     private Integer deleteFlag;
     private Date createDate;
     private String contentType;
@@ -53,11 +53,11 @@ public class File {
         this.fileName = fileName;
     }
 
-    public Integer getFileLength() {
+    public Long getFileLength() {
         return fileLength;
     }
 
-    public void setFileLength(Integer fileLength) {
+    public void setFileLength(Long fileLength) {
         this.fileLength = fileLength;
     }
 
