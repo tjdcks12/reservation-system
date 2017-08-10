@@ -1,7 +1,10 @@
 var extend = require('./egjs-extend');
 module.exports = extend(eg.Component, {
 
-    init: function (params) {
+    init: function () {
+        this.cachedData = {};
+    },
+    setParams: function (params) {
         this.obj = {};
         Object.assign(this.obj,
             this.options = Object.assign({}, {
@@ -9,13 +12,18 @@ module.exports = extend(eg.Component, {
                 url: null,
                 contentType: "applicationJSON",
                 data: null
-
             }), params);
-
     },
-    ajax: function(foo){
-        console.log(this.obj);
+    ajax: function (foo) {
+        var cachedData = this.cachedData[this.obj.url];
+        if (cachedData) {
+            return foo(cachedData);
+        }
         $.ajax(this.obj).then(foo);
+    },
+    setCachedData: function(data){
+        this.cachedData[this.obj.url] = data;
     }
+
 
 });
