@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductDto> getProduct(Integer page, Integer categoryId) {
+        page *= count;
         if (categoryId == 1) {
             return productDao.selectProducDtoInPage(page, count);
         }

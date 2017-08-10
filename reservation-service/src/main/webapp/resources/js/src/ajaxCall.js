@@ -1,6 +1,5 @@
 var extend = require('./egjs-extend');
 module.exports = extend(eg.Component, {
-
     init: function () {
         this.cachedData = {};
     },
@@ -21,9 +20,8 @@ module.exports = extend(eg.Component, {
         }
         $.ajax(this.obj).then(foo);
     },
-    setCachedData: function(data){
-        this.cachedData[this.obj.url] = data;
+    setCachedData: function(url, data){
+        console.log(this.cachedData);
+        this.cachedData[url] = data;
     }
-
-
 });

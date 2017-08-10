@@ -44,7 +44,7 @@
                             <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 --->
                             <ul class="visual_img">
                                 <li class="item"
-                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
+                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;  height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
@@ -55,7 +55,7 @@
                                     </a>
                                 </li>
                                 <li class="item"
-                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170119_48/1484802596907hmVDm_JPEG/image.jpg); width: 338px;">
+                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170119_48/1484802596907hmVDm_JPEG/image.jpg); width: 338px; height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
@@ -66,7 +66,7 @@
                                     </a>
                                 </li>
                                 <li class="item"
-                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;">
+                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px; height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
@@ -197,7 +197,7 @@
                 </ul>
                 <!-- 더보기 -->
                 <div class="more">
-                    <button class="btn"><span>더보기</span></button>
+                    <button class="btn _more"><span>더보기</span></button>
                 </div>
             </div>
         </div>

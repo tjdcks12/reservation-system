@@ -400,8 +400,11 @@ exports.logger = _logger2['default'];
 
 __webpack_require__(5);
 __webpack_require__(6);
-var CategoryList = __webpack_require__(7);
 
+var CategoryList = __webpack_require__(7);
+var CarousellFlicking = __webpack_require__(27);
+
+var carouselFlicking = new CarousellFlicking();
 var categoryList = new CategoryList($('.event_tab_lst'));
 
 
@@ -17024,52 +17027,89 @@ module.exports = extend(eg.Component, {
 
     init: function ($element) {
         this.$categoryBlock = $element;
-        this.$productBlock = $('.lst_event_box');
+        this.$productBlock = $('.section_event_lst');
         this.$anchor = $('.anchor.active');
+        this.$rightUl = this.$productBlock.find('.lst_event_box').eq(0);
+        this.$leftUl = this.$productBlock.find('.lst_event_box').eq(1);
+        this.$moreButton = this.$productBlock.find('._more');
         this.$categoryBlock.on('click', this.toggleCategory.bind(this));
-        this.ajaxObject = new AjaxCall();
+        this.categoryAjax = new AjaxCall();
+        this.productAjax = new AjaxCall();
         this.page = 0;
+        this.pageCount = 4;
+        this.maxPage = parseInt(this.$productBlock.find('.pink').text().replace("개", "")) / this.pageCount;
+        this.categoryId = 1;
+        this.emptyAndAddProducts(this.categoryId);
+        this.$moreButton.on('click', this.moreProducts.bind(this));
+        this.changeScroll();
     },
     toggleCategory: function (e) {
         var $x = $(e.target).closest('.anchor');
-        var categoryId;
         if ($x.hasClass('anchor') && $x[0] !== this.$anchor[0]) {
             this.page = 0;
             this.$anchor.toggleClass('active', false);
             $x.toggleClass('active', true);
             this.$anchor = $x;
-            categoryId = $x.closest('.item').data('category');
-            this.changeCategory(categoryId);
-            this.changeProducts(categoryId, this.page);
+            this.categoryId = $x.closest('.item').data('category');
+            this.changeCategory(this.categoryId);
+            this.emptyAndAddProducts(this.categoryId);
         }
     },
-    changeCategory: function(categoryId){
+    changeCategory: function (categoryId) {
         var categoryUrl = "/api/products/categories/" + categoryId + "/count";
-        this.ajaxCall({url: categoryUrl}, this.getCount);
+        this.ajaxCall({url: categoryUrl}, this.categoryAjax, this.getCount);
     },
-    changeProducts: function(categoryId, page){
-        var productUrl = "/api/products/categories/" + categoryId + "/pages/"+page;
-        this.ajaxCall({url: productUrl}, this.appendProducts);
+    changeScroll: function () {
+        $(window).scroll(function (e) {
+            if ($(document).height() - window.innerHeight - (window.scrollY / 10) < window.scrollY) {
+                this.moreProducts();
+            }
+        }.bind(this));
+    },
+    moreProducts: function () {
+        this.page++;
+        this.changeProducts(this.categoryId, this.page);
+    },
+    emptyAndAddProducts: function (categoryId) {
+        this.$leftUl.empty();
+        this.$rightUl.empty();
+        this.changeProducts(categoryId, this.page);
+    },
 
+    changeProducts: function (categoryId, page) {
+        if (page < this.maxPage) {
+            var productUrl = "/api/products/categories/" + categoryId + "/pages/" + page;
+            this.ajaxCall({url: productUrl}, this.productAjax, this.appendProducts);
+        }
     },
 
-    ajaxCall: function(obj, foo){
-        this.ajaxObject.setParams(obj);
-        this.ajaxObject.ajax(foo.bind(this));
+    ajaxCall: function (obj, ajaxObj, foo) {
+        ajaxObj.setParams(obj);
+        ajaxObj.ajax(foo.bind(this));
     },
-    appendProducts: function(data){
+    appendProducts: function (data) {
         this.getProductsByCategory(data);
-        // console.log(data);
     },
     getCount: function (data) {
         $('.pink').text(data + "개");
-        this.ajaxObject.setCachedData(data);
+        this.maxPage = parseInt(data) / this.pageCount;
+        this.categoryAjax.setCachedData(data);
     },
     getProductsByCategory: function (data) {
-        for(var i = 0; i<data.length; i++){
-
-            console.log(productTemplate(data[i]));
+        var left = [];
+        var right = [];
+        for (var i = 0; i < data.length; i++) {
+            if (i % 2 === 0) {
+                left.push(data[i]);
+            } else {
+                right.push(data[i]);
+            }
         }
+        left = productTemplate({data: left});
+        right = productTemplate({data: right});
+        this.$leftUl.append(left);
+        this.$rightUl.append(right);
+        this.productAjax.setCachedData(data);
     }
 
 
@@ -17082,7 +17122,6 @@ module.exports = extend(eg.Component, {
 
 var extend = __webpack_require__(2);
 module.exports = extend(eg.Component, {
-
     init: function () {
         this.cachedData = {};
     },
@@ -17103,11 +17142,10 @@ module.exports = extend(eg.Component, {
         }
         $.ajax(this.obj).then(foo);
     },
-    setCachedData: function(data){
-        this.cachedData[this.obj.url] = data;
+    setCachedData: function(url, data){
+        console.log(this.cachedData);
+        this.cachedData[url] = data;
     }
-
-
 });
 
 /***/ }),
@@ -17116,20 +17154,24 @@ module.exports = extend(eg.Component, {
 
 var Handlebars = __webpack_require__(10);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=container.escapeExpression, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=helpers.helperMissing, alias4="function";
 
   return "<li class=\"item\">\r\n    <a href=\"#\" class=\"item_book\">\r\n        <div class=\"item_preview\"><img alt=\""
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + alias1(container.lambda((depth0 != null ? depth0.name : depth0), depth0))
     + "\" class=\"img_thumb\" src=\""
-    + alias4(((helper = (helper = helpers.fileId || (depth0 != null ? depth0.fileId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"fileId","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.fileId || (depth0 != null ? depth0.fileId : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"fileId","hash":{},"data":data}) : helper)))
     + "\">\r\n            <span class=\"img_border\"></span></div>\r\n        <div class=\"event_txt\">\r\n            <h4 class=\"event_txt_tit\"><span>"
-    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data}) : helper)))
     + "</span>\r\n                <small class=\"sm\">"
-    + alias4(((helper = (helper = helpers.placeName || (depth0 != null ? depth0.placeName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"placeName","hash":{},"data":data}) : helper)))
+    + alias1(((helper = (helper = helpers.placeName || (depth0 != null ? depth0.placeName : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"placeName","hash":{},"data":data}) : helper)))
     + "</small>\r\n            </h4>\r\n            <p class=\"event_txt_dsc\">"
-    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
-    + "</p>\r\n        </div>\r\n    </a>\r\n</li>";
+    + alias1(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"description","hash":{},"data":data}) : helper)))
+    + "</p>\r\n        </div>\r\n    </a>\r\n</li>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.data : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 
 /***/ }),
@@ -18077,6 +18119,19 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports) {
+
+module.exports = extend(eg.Component, {
+    init : function ($root) {
+        this.$root = $root;
+        this.$ul = $root.find('ul');
+        
+    }
+
+});
 
 /***/ })
 /******/ ]);

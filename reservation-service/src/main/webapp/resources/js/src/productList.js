@@ -5,52 +5,89 @@ module.exports = extend(eg.Component, {
 
     init: function ($element) {
         this.$categoryBlock = $element;
-        this.$productBlock = $('.lst_event_box');
+        this.$productBlock = $('.section_event_lst');
         this.$anchor = $('.anchor.active');
+        this.$rightUl = this.$productBlock.find('.lst_event_box').eq(0);
+        this.$leftUl = this.$productBlock.find('.lst_event_box').eq(1);
+        this.$moreButton = this.$productBlock.find('._more');
         this.$categoryBlock.on('click', this.toggleCategory.bind(this));
-        this.ajaxObject = new AjaxCall();
+        this.categoryAjax = new AjaxCall();
+        this.productAjax = new AjaxCall();
         this.page = 0;
+        this.pageCount = 4;
+        this.maxPage = parseInt(this.$productBlock.find('.pink').text().replace("개", "")) / this.pageCount;
+        this.categoryId = 1;
+        this.emptyAndAddProducts(this.categoryId);
+        this.$moreButton.on('click', this.moreProducts.bind(this));
+        this.changeScroll();
     },
     toggleCategory: function (e) {
         var $x = $(e.target).closest('.anchor');
-        var categoryId;
         if ($x.hasClass('anchor') && $x[0] !== this.$anchor[0]) {
             this.page = 0;
             this.$anchor.toggleClass('active', false);
             $x.toggleClass('active', true);
             this.$anchor = $x;
-            categoryId = $x.closest('.item').data('category');
-            this.changeCategory(categoryId);
-            this.changeProducts(categoryId, this.page);
+            this.categoryId = $x.closest('.item').data('category');
+            this.changeCategory(this.categoryId);
+            this.emptyAndAddProducts(this.categoryId);
         }
     },
-    changeCategory: function(categoryId){
+    changeCategory: function (categoryId) {
         var categoryUrl = "/api/products/categories/" + categoryId + "/count";
-        this.ajaxCall({url: categoryUrl}, this.getCount);
+        this.ajaxCall({url: categoryUrl}, this.categoryAjax, this.getCount);
     },
-    changeProducts: function(categoryId, page){
-        var productUrl = "/api/products/categories/" + categoryId + "/pages/"+page;
-        this.ajaxCall({url: productUrl}, this.appendProducts);
+    changeScroll: function () {
+        $(window).scroll(function (e) {
+            if ($(document).height() - window.innerHeight - (window.scrollY / 10) < window.scrollY) {
+                this.moreProducts();
+            }
+        }.bind(this));
+    },
+    moreProducts: function () {
+        this.page++;
+        this.changeProducts(this.categoryId, this.page);
+    },
+    emptyAndAddProducts: function (categoryId) {
+        this.$leftUl.empty();
+        this.$rightUl.empty();
+        this.changeProducts(categoryId, this.page);
+    },
 
+    changeProducts: function (categoryId, page) {
+        if (page < this.maxPage) {
+            var productUrl = "/api/products/categories/" + categoryId + "/pages/" + page;
+            this.ajaxCall({url: productUrl}, this.productAjax, this.appendProducts);
+        }
     },
 
-    ajaxCall: function(obj, foo){
-        this.ajaxObject.setParams(obj);
-        this.ajaxObject.ajax(foo.bind(this));
+    ajaxCall: function (obj, ajaxObj, foo) {
+        ajaxObj.setParams(obj);
+        ajaxObj.ajax(foo.bind(this));
     },
-    appendProducts: function(data){
+    appendProducts: function (data) {
         this.getProductsByCategory(data);
-        // console.log(data);
     },
     getCount: function (data) {
         $('.pink').text(data + "개");
-        this.ajaxObject.setCachedData(data);
+        this.maxPage = parseInt(data) / this.pageCount;
+        this.categoryAjax.setCachedData(data);
     },
     getProductsByCategory: function (data) {
-        for(var i = 0; i<data.length; i++){
-
-            console.log(productTemplate(data[i]));
+        var left = [];
+        var right = [];
+        for (var i = 0; i < data.length; i++) {
+            if (i % 2 === 0) {
+                left.push(data[i]);
+            } else {
+                right.push(data[i]);
+            }
         }
+        left = productTemplate({data: left});
+        right = productTemplate({data: right});
+        this.$leftUl.append(left);
+        this.$rightUl.append(right);
+        this.productAjax.setCachedData(data);
     }
 
 
