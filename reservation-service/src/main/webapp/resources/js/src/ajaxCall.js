@@ -21,7 +21,6 @@ module.exports = extend(eg.Component, {
         $.ajax(this.obj).then(foo);
     },
     setCachedData: function(url, data){
-        console.log(this.cachedData);
         this.cachedData[url] = data;
     }
 });

@@ -6,34 +6,38 @@ module.exports = extend(eg.Component, {
         this.$next = $root.find('._next');
         this.$prev = $root.find('._prev');
         this.picWidth = this.$ul.find('li').width();
+        this.dX = 0;
         this.isClicked = false;
         this.moveRatio = 5;
         this.isTouched = false;
+        this.isMouseOverd = false;
         this.bindSlideEvent();
+        this.autoSlide();
+
     },
-    bindSlideEvent: function(){
+    bindSlideEvent: function () {
         this.$next.on('click', this.nextPic.bind(this));
         this.$prev.on('click', this.prevPic.bind(this));
-        this.$ul.on('mousedown touchstart',this.startMouseTouch.bind(this));
+        this.$ul.on('mousedown touchstart', this.startMouseTouch.bind(this));
         this.$ul.on('mousemove touchmove', this.moveMouseTouch.bind(this));
         this.$ul.on('moveup touchend', this.endMouseTouch.bind(this));
     },
-    startMouseTouch: function(e){
-        if(e.type === "touchstart") {
+    startMouseTouch: function (e) {
+        if (e.type === "touchstart") {
             e = e.originalEvent.changedTouches[0];
             this.identifier = e.identifier;
         }
         this.startX = e.clientX;
         this.isTouched = true;
     },
-    moveMouseTouch: function(e){
-        if(e.type === "touchmove"){
+    moveMouseTouch: function (e) {
+        if (e.type === "touchmove") {
             e = e.originalEvent.changedTouches[0];
-            if(e.identifier !== this.identifier){
+            if (e.identifier !== this.identifier) {
                 return;
             }
         }
-        if(this.isTouched) {
+        if (this.isTouched) {
             this.currentX = e.clientX;
             this.dX = this.currentX - this.startX;
 
@@ -48,22 +52,23 @@ module.exports = extend(eg.Component, {
             }
         }
     },
-    endMouseTouch: function(e){
-        if(e.type === "touchEnd"){
+    endMouseTouch: function (e) {
+        if (e.type === "touchEnd") {
             e = e.originalEvent.changedTouches[0];
-            if(e.identifier !== this.identifier){
+            if (e.identifier !== this.identifier) {
                 return;
             }
         }
         this.endX = e.clientX;
         this.$ul.animate({"transform": "translateX(" + 0 + "px)"});
     },
-    nextPic: function(e){
-        if(!this.isClicked) {
+    nextPic: function (e) {
+        if (!this.isClicked) {
             this.isClicked = true;
             var firstPic = this.$ul.find('li:first-child');
             this.$ul.append(firstPic[0].outerHTML);
             this.$ul.animate({"transform": "translateX(" + (-this.picWidth) + "px)"}, function () {
+
                 firstPic.remove();
                 this.$ul.css({"transform": "translateX(" + 0 + "px)"});
                 this.isTouched = false;
@@ -71,19 +76,36 @@ module.exports = extend(eg.Component, {
             }.bind(this));
         }
     },
-    prevPic: function(e){
-        if(!this.isClicked) {
+    prevPic: function (e) {
+        if (!this.isClicked) {
             this.isClicked = true;
             var lastPic = this.$ul.find('li:last-child');
             this.$ul.prepend(lastPic[0].outerHTML);
-            this.$ul.css({"transform": "translateX(" + (-this.picWidth+this.dX) + "px)"});
+            console.log(this.dX);
+            this.$ul.css({"transform": "translateX(" + (-this.picWidth + this.dX) + "px)"});
+            this.dX = 0;
             this.$ul.animate({"transform": "translateX(" + (0) + "px)"}, function () {
+
                 lastPic.remove();
                 this.isTouched = false;
                 this.isClicked = false;
             }.bind(this));
         }
+    },
+    autoSlide: function () {
+        this.timerId = setInterval(this.nextPic.bind(this), 2000);
+        this.$root.on('mouseover', this.setTimer.bind(this));
+    },
+    manageTimer: function () {
+        clearInterval(this.timerId);
+        this.timerId = setInterval(this.nextPic.bind(this), 2000)
+    },
+    setTimer: function (e) {
+        if (!this.isMouseOvered) {
+            this.isMouseOverd = true;
+            clearInterval(this.timerId);
+            setTimeout(this.manageTimer.bind(this), 2000);
+        }
     }
-
 
 });

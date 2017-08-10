@@ -4,6 +4,7 @@ var productTemplate = require('./handlebars-templates/product-template.html');
 module.exports = extend(eg.Component, {
 
     init: function ($element) {
+        this.url = $('.lnk_logo').attr('href');
         this.$categoryBlock = $element;
         this.$productBlock = $('.section_event_lst');
         this.$anchor = $('.anchor.active');
@@ -55,7 +56,7 @@ module.exports = extend(eg.Component, {
     },
 
     changeProducts: function (categoryId, page) {
-        if (page < this.maxPage) {
+        if (page <= this.maxPage) {
             var productUrl = "/api/products/categories/" + categoryId + "/pages/" + page;
             this.ajaxCall({url: productUrl}, this.productAjax, this.appendProducts);
         }
@@ -77,6 +78,7 @@ module.exports = extend(eg.Component, {
         var left = [];
         var right = [];
         for (var i = 0; i < data.length; i++) {
+            data[i].fileUrl = this.url + "/file/img?file_id=" + data[i].fileId;
             if (i % 2 === 0) {
                 left.push(data[i]);
             } else {
