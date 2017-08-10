@@ -404,7 +404,7 @@ __webpack_require__(6);
 var CategoryList = __webpack_require__(7);
 var CarousellFlicking = __webpack_require__(27);
 
-var carouselFlicking = new CarousellFlicking();
+var carouselFlicking = new CarousellFlicking($('.group_visual'));
 var categoryList = new CategoryList($('.event_tab_lst'));
 
 
@@ -17157,17 +17157,17 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=container.escapeExpression, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=helpers.helperMissing, alias4="function";
 
-  return "<li class=\"item\">\r\n    <a href=\"#\" class=\"item_book\">\r\n        <div class=\"item_preview\"><img alt=\""
+  return "<li class=\"item\">\n    <a href=\"#\" class=\"item_book\">\n        <div class=\"item_preview\"><img alt=\""
     + alias1(container.lambda((depth0 != null ? depth0.name : depth0), depth0))
     + "\" class=\"img_thumb\" src=\""
     + alias1(((helper = (helper = helpers.fileId || (depth0 != null ? depth0.fileId : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"fileId","hash":{},"data":data}) : helper)))
-    + "\">\r\n            <span class=\"img_border\"></span></div>\r\n        <div class=\"event_txt\">\r\n            <h4 class=\"event_txt_tit\"><span>"
+    + "\">\n            <span class=\"img_border\"></span></div>\n        <div class=\"event_txt\">\n            <h4 class=\"event_txt_tit\"><span>"
     + alias1(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</span>\r\n                <small class=\"sm\">"
+    + "</span>\n                <small class=\"sm\">"
     + alias1(((helper = (helper = helpers.placeName || (depth0 != null ? depth0.placeName : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"placeName","hash":{},"data":data}) : helper)))
-    + "</small>\r\n            </h4>\r\n            <p class=\"event_txt_dsc\">"
+    + "</small>\n            </h4>\n            <p class=\"event_txt_dsc\">"
     + alias1(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"description","hash":{},"data":data}) : helper)))
-    + "</p>\r\n        </div>\r\n    </a>\r\n</li>\r\n";
+    + "</p>\n        </div>\n    </a>\n</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -18122,14 +18122,95 @@ module.exports = g;
 
 /***/ }),
 /* 27 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+var extend = __webpack_require__(2);
 module.exports = extend(eg.Component, {
-    init : function ($root) {
+    init: function ($root) {
         this.$root = $root;
         this.$ul = $root.find('ul');
-        
+        this.$next = $root.find('._next');
+        this.$prev = $root.find('._prev');
+        this.picWidth = this.$ul.find('li').width();
+        this.isClicked = false;
+        this.moveRatio = 5;
+        this.isTouched = false;
+        this.bindSlideEvent();
+    },
+    bindSlideEvent: function(){
+        this.$next.on('click', this.nextPic.bind(this));
+        this.$prev.on('click', this.prevPic.bind(this));
+        this.$ul.on('mousedown touchstart',this.startMouseTouch.bind(this));
+        this.$ul.on('mousemove touchmove', this.moveMouseTouch.bind(this));
+        this.$ul.on('moveup touchend', this.endMouseTouch.bind(this));
+    },
+    startMouseTouch: function(e){
+        if(e.type === "touchstart") {
+            e = e.originalEvent.changedTouches[0];
+            this.identifier = e.identifier;
+        }
+        this.startX = e.clientX;
+        this.isTouched = true;
+    },
+    moveMouseTouch: function(e){
+        if(e.type === "touchmove"){
+            e = e.originalEvent.changedTouches[0];
+            if(e.identifier !== this.identifier){
+                return;
+            }
+        }
+        if(this.isTouched) {
+            this.currentX = e.clientX;
+            this.dX = this.currentX - this.startX;
+
+            if (this.dX > this.picWidth / this.moveRatio) {
+                this.prevPic();
+                return;
+            } else if (this.dX < -this.picWidth / this.moveRatio) {
+                this.nextPic();
+                return;
+            } else {
+                this.$ul.css({"transform": "translateX(" + this.dX + "px)"});
+            }
+        }
+    },
+    endMouseTouch: function(e){
+        if(e.type === "touchEnd"){
+            e = e.originalEvent.changedTouches[0];
+            if(e.identifier !== this.identifier){
+                return;
+            }
+        }
+        this.endX = e.clientX;
+        this.$ul.animate({"transform": "translateX(" + 0 + "px)"});
+    },
+    nextPic: function(e){
+        if(!this.isClicked) {
+            this.isClicked = true;
+            var firstPic = this.$ul.find('li:first-child');
+            this.$ul.append(firstPic[0].outerHTML);
+            this.$ul.animate({"transform": "translateX(" + (-this.picWidth) + "px)"}, function () {
+                firstPic.remove();
+                this.$ul.css({"transform": "translateX(" + 0 + "px)"});
+                this.isTouched = false;
+                this.isClicked = false;
+            }.bind(this));
+        }
+    },
+    prevPic: function(e){
+        if(!this.isClicked) {
+            this.isClicked = true;
+            var lastPic = this.$ul.find('li:last-child');
+            this.$ul.prepend(lastPic[0].outerHTML);
+            this.$ul.css({"transform": "translateX(" + (-this.picWidth+this.dX) + "px)"});
+            this.$ul.animate({"transform": "translateX(" + (0) + "px)"}, function () {
+                lastPic.remove();
+                this.isTouched = false;
+                this.isClicked = false;
+            }.bind(this));
+        }
     }
+
 
 });
 

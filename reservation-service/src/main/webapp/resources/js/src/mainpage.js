@@ -4,6 +4,6 @@ require('../node_modules/egjs/dist/eg');
 var CategoryList = require('./productList');
 var CarousellFlicking = require('./carouselFlicking');
 
-var carouselFlicking = new CarousellFlicking();
+var carouselFlicking = new CarousellFlicking($('.group_visual'));
 var categoryList = new CategoryList($('.event_tab_lst'));
 

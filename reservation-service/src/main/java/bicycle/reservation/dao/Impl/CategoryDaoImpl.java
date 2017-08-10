@@ -65,7 +65,7 @@ public class CategoryDaoImpl implements CategoryDao{
         try {
              insertResult = insertAction.executeAndReturnKey(params).intValue();
         }catch (Exception e){
-            insertResult = null;
+            throw new CustomException();
         }
         return insertResult;
     }
