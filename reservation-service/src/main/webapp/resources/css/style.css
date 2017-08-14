@@ -3800,3 +3800,7 @@ button {
   top: 0;
   font-size: 10px;
 }
+
+.detail_image {
+    max-height: 414px;
+}

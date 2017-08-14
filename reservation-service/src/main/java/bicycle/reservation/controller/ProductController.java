@@ -2,6 +2,7 @@ package bicycle.reservation.controller;
 
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.service.CategoryService;
+import bicycle.reservation.service.FileService;
 import bicycle.reservation.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class ProductController {
     public ProductController(ProductService productService, CategoryService categoryService){
         this.productService = productService;
         this.categoryService = categoryService;
+
     }
 
     @GetMapping
@@ -34,9 +36,11 @@ public class ProductController {
 
     @GetMapping("/exhibition/{productId}")
     public ModelAndView productDetailPage(@PathVariable(name = "productId") Integer proudctId, ModelAndView modelAndView) {
-        ProductDetailDto productDetailDto = productService.getProductDetailByProductId(proudctId);
+        modelAndView.addObject("product",productService.getProductDetailByProductId(proudctId));
+        modelAndView.addObject("productFiles", productService.getFilesByProductId(proudctId));
         modelAndView.setViewName("productDetail");
         return modelAndView;
     }
+
 
 }

@@ -2,7 +2,6 @@ var extend = require('./egjs-extend');
 var AjaxCall = require('./ajaxCall');
 var productTemplate = require('./handlebars-templates/product-template.html');
 module.exports = extend(eg.Component, {
-
     init: function ($element) {
         this.url = $('.lnk_logo').attr('href');
         this.$categoryBlock = $element;
@@ -16,7 +15,7 @@ module.exports = extend(eg.Component, {
         this.productAjax = new AjaxCall();
         this.page = 0;
         this.pageCount = 4;
-        this.maxPage = parseInt(this.$productBlock.find('.pink').text().replace("개", "")) / this.pageCount;
+        this.maxPage = this.$productBlock.find('.pink').data('product-count') / this.pageCount;
         this.categoryId = 1;
         this.emptyAndAddProducts(this.categoryId);
         this.$moreButton.on('click', this.moreProducts.bind(this));
@@ -62,9 +61,8 @@ module.exports = extend(eg.Component, {
         }
     },
 
-    ajaxCall: function (obj, ajaxObj, foo) {
-        ajaxObj.setParams(obj);
-        ajaxObj.ajax(foo.bind(this));
+    ajaxCall: function (obj, ajaxObj, doSomething) {
+        ajaxObj.ajax(obj, doSomething.bind(this));
     },
     appendProducts: function (data) {
         this.getProductsByCategory(data);

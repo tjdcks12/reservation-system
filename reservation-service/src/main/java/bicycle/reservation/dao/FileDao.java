@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FileDao {
     public File selectFileByFileId(Integer fileId);
-    List<File> selectFilesByProductId(Integer productId);
+    List<Integer> selectFilesByProductId(Integer productId);
 }

@@ -2,9 +2,9 @@ var extend = require('./egjs-extend');
 module.exports = extend(eg.Component, {
     init: function () {
         this.cachedData = {};
-    },
-    setParams: function (params) {
         this.obj = {};
+    },
+    ajax: function (params, doSomething) {
         Object.assign(this.obj,
             this.options = Object.assign({}, {
                 method: 'GET',
@@ -12,15 +12,17 @@ module.exports = extend(eg.Component, {
                 contentType: "applicationJSON",
                 data: null
             }), params);
-    },
-    ajax: function (foo) {
+        var d = new Date();
+        var nowTime = d.getTime();
         var cachedData = this.cachedData[this.obj.url];
-        if (cachedData) {
-            return foo(cachedData);
+        if (cachedData && nowTime-cachedData.time < 300000) {
+            return doSomething(cachedData.data);
         }
-        $.ajax(this.obj).then(foo);
+        $.ajax(this.obj).then(doSomething);
     },
-    setCachedData: function(url, data){
-        this.cachedData[url] = data;
+    setCachedData: function(data){
+        var d = new Date();
+        var saveTime = d.getTime();
+        this.cachedData[this.obj.url] = {'data': data, 'time': saveTime};
     }
 });

@@ -1,6 +1,8 @@
 package bicycle.reservation.service.impl;
 
+import bicycle.reservation.dao.FileDao;
 import bicycle.reservation.dao.ProductDao;
+import bicycle.reservation.model.domain.File;
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.model.dto.ProductDto;
 import bicycle.reservation.service.ProductService;
@@ -15,11 +17,18 @@ import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
     private ProductDao productDao;
+    private FileDao fileDao;
 
     @Value("${app.page.count}")
     private Integer count;
+
+    @Autowired
+    public ProductServiceImpl(ProductDao productDao, FileDao fileDao){
+        this.productDao = productDao;
+        this.fileDao = fileDao;
+    }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -38,10 +47,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Integer getProductsCountByCategoryId(Integer categoryId) {
         if(categoryId == 1){
             return productDao.selectAllProductsCount();
         }
         return productDao.selectProductsCountByCategoryId(categoryId);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Integer> getFilesByProductId(Integer productId) {
+        return fileDao.selectFilesByProductId(productId);
+    }
+
+
 }

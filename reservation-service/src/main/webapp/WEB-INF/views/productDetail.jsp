@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c' %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -27,8 +29,8 @@
             <div class="section_visual">
                 <header>
                     <h1 class="logo">
-                        <a href="#" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                        <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                        <a href="www.naver.com" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                        <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                     </h1>
                     <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
                 </header>
@@ -36,42 +38,28 @@
                     <div class="bg_pagination"></div>
                     <div class="figure_pagination">
                         <span class="num">1</span>
-                        <span class="num off">/ <span>3</span></span>
+                        <span class="num off" data-product-file-count="${fn:length(productFiles)}">/ <span>${fn:length(productFiles)}</span></span>
                     </div>
                 </div>
                 <div class="group_visual">
                     <div>
                         <div class="container_visual" style="width: 414px;">
                             <ul class="visual_img">
-                                <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                    <div class="visual_txt">
-                                        <div class="visual_txt_inn">
-                                            <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                            <p class="visual_txt_dsc"></p>
+                                <c:forEach var="productFile" items="${productFiles}">
+                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb detail_image" src="http://220.230.122.151/file/img?file_id=${productFile}"> <span class="img_bg"></span>
+                                        <div class="visual_txt">
+                                            <div class="visual_txt_inn">
+                                                <h2 class="visual_txt_tit"> <span>${product.name}</span> </h2>
+                                                <p class="visual_txt_dsc"></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                    <div class="visual_txt">
-                                        <div class="visual_txt_inn">
-                                            <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                            <p class="visual_txt_dsc"></p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="https://ssl.phinf.net/naverbooking/20170119_135/1484789767866RPO6o_JPEG/%B7%CE%B9%CC%BF%C0%C1%D9%B8%AE%BF%A7_1242.jpg?type=ff1242_1242"> <span class="img_bg"></span>
-                                    <div class="visual_txt">
-                                        <div class="visual_txt_inn">
-                                            <h2 class="visual_txt_tit"> <span>뮤지컬 로미오와 줄리엣</span> </h2>
-                                            <p class="visual_txt_dsc"></p>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                         <div class="prev">
                             <div class="prev_inn">
-                                <a href="#" class="btn_prev" title="이전">
+                                <a href="#" class="btn_prev _prev" title="이전">
                                     <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
                                     <i class="spr_book2 ico_arr6_lt off"></i>
                                 </a>
@@ -79,7 +67,7 @@
                         </div>
                         <div class="nxt">
                             <div class="nxt_inn">
-                                <a href="#" class="btn_nxt" title="다음">
+                                <a href="#" class="btn_nxt _next" title="다음">
                                     <i class="spr_book2 ico_arr6_rt"></i>
                                 </a>
                             </div>
@@ -87,9 +75,15 @@
                     </div>
                 </div>
                 <div class="group_btn_goto">
-                    <a class="btn_goto_home" title="홈페이지" href="#" target="siteUrl"> <i class="fn fn-home1"></i> </a>
-                    <a class="btn_goto_tel" title="전화" href="#"> <i class="fn fn-call1"></i> </a>
-                    <a class="btn_goto_mail" title="이메일" href="#"> <i class="fn fn-mail1"></i> </a>
+                    <c:if test="${!empty product.homepage}">
+                        <a class="btn_goto_home" title="홈페이지" href="${product.homepage}" target="siteUrl"> <i class="fn fn-home1"></i> </a>
+                    </c:if>
+                    <c:if test="${!empty product.tel}">
+                        <a class="btn_goto_tel" title="전화" href="tel:${product.tel}"> <i class="fn fn-call1"></i> </a>
+                    </c:if>
+                    <c:if test="${!empty product.email}">
+                        <a class="btn_goto_mail" title="이메일" href="mailto:${product.email}"> <i class="fn fn-mail1"></i> </a>
+                    </c:if>
                     <a href="#" class="btn_goto_path" title="길찾기"> <i class="fn fn-path-find1"></i> </a>
                     <a href="#" class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
                 </div>
@@ -111,7 +105,7 @@
                         <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
                     </div>
                     <div class="event_info">
-                        <div class="in_dsc">[네이버예약 특별할인]<br>R석 50%, S석 60% 할인</div>
+                        <div class="in_dsc">${product.event}</div>
                     </div>
                 </div>
             </div>
@@ -249,6 +243,9 @@
         <span class="copyright">© NAVER Corp.</span>
     </div>
 </footer>
+
+<script src="/resources/js/dist/detailpage.js"></script>
+
 <div id="photoviwer"></div>
 </body>
 

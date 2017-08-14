@@ -18,21 +18,24 @@ public class LoggingAdvice {
             "execution(* bicycle.reservation.controller.*.*(..)) || " +
             "execution(* bicycle.reservation.dao.*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
-        logger.info("=============" + joinPoint.getSignature().getName() + " is running =============");
+        logger.info("\n=============" + joinPoint.getTarget().getClass()+ " : "+
+                joinPoint.getSignature().getName() + "() is running =============");
     }
 
     @AfterReturning("execution(* bicycle.reservation.service.*.*(..)) || " +
             "execution(* bicycle.reservation.controller.*.*(..)) || " +
             "execution(* bicycle.reservation.dao.*.*(..))")
     public void logAfter(JoinPoint joinPoint) {
-        logger.info("=============" + joinPoint.getSignature().getName() + " is over =============");
+        logger.info("\n=============" + joinPoint.getTarget().getClass()+ " : " +
+                joinPoint.getSignature().getName() + "() is over =============");
     }
 
     @AfterThrowing(pointcut = "execution(* bicycle.reservation.service.*.*(..)) || " +
             "execution(* bicycle.reservation.controller.*.*(..)) || " +
             "execution(* bicycle.reservation.dao.*.*(..))", throwing = "exception")
     public void logAfterThrowing(JoinPoint joinPoint, Exception exception) {
-        logger.error("=============" + joinPoint.getSignature().getName() + " is something wrong =============");
-        logger.error("=============error message : " + exception.getCause().getMessage() + "=============");
+        logger.error("\n=============" + joinPoint.getTarget().getClass()+ " : " +
+                joinPoint.getSignature().getName() + "() is something wrong =============");
+        logger.error("\n=============error message : " + exception.getCause().getMessage() + "=============");
     }
 }

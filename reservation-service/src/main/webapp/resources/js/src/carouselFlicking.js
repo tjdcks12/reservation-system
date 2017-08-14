@@ -1,6 +1,6 @@
 var extend = require('./egjs-extend');
 module.exports = extend(eg.Component, {
-    init: function ($root) {
+    init: function ($root, options) {
         this.$root = $root;
         this.$ul = $root.find('ul');
         this.$next = $root.find('._next');
@@ -12,7 +12,9 @@ module.exports = extend(eg.Component, {
         this.isTouched = false;
         this.isMouseOverd = false;
         this.bindSlideEvent();
-        this.autoSlide();
+        if(options.autoSlide) {
+            this.autoSlide();
+        }
     },
     bindSlideEvent: function () {
         this.$next.on('click', this.nextPic.bind(this));
@@ -80,7 +82,6 @@ module.exports = extend(eg.Component, {
             this.isClicked = true;
             var lastPic = this.$ul.find('li:last-child');
             this.$ul.prepend(lastPic[0].outerHTML);
-            console.log(this.dX);
             this.$ul.css({"transform": "translateX(" + (-this.picWidth + this.dX) + "px)"});
             this.dX = 0;
             this.$ul.animate({"transform": "translateX(" + (0) + "px)"}, function () {

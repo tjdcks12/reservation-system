@@ -1,7 +1,8 @@
 module.exports = {
 
     entry: {
-        'mainpage': './src/mainpage.js'
+        'mainpage': './src/mainpage.js',
+        'detailpage': './src/detailpage.js'
     },
     output: {
         filename: './dist/[name].js'

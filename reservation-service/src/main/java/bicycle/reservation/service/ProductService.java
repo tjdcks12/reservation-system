@@ -1,5 +1,6 @@
 package bicycle.reservation.service;
 
+import bicycle.reservation.model.domain.File;
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.model.dto.ProductDto;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,5 @@ public interface ProductService {
 
     public Integer getProductsCountByCategoryId(Integer categoryId);
 
-
+    public List<Integer> getFilesByProductId(Integer productId);
 }

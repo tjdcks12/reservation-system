@@ -42,12 +42,12 @@ public class FileDaoImpl implements FileDao {
         return file;
     }
 
-    public List<File> selectFilesByProductId(Integer productId) {
+    public List<Integer> selectFilesByProductId(Integer productId) {
         Map<String, Object> params = new HashMap<>();
         params.put("productId", productId);
-        List<File> files = null;
+        List<Integer> files = null;
         try {
-            files = jdbc.query(FileSqls.SELECT_FILES_BY_PRODUCT_ID, params, fileRowMapper);
+            files = jdbc.queryForList(FileSqls.SELECT_FILES_BY_PRODUCT_ID, params, Integer.class);
         }catch (DataAccessException e){
             throw new CustomException();
         }
