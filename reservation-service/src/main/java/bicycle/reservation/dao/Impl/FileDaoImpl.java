@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -40,5 +41,17 @@ public class FileDaoImpl implements FileDao {
         }
 
         return file;
+    }
+
+    public List<File> selectFilesByProductId(Integer productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        List<File> files = null;
+        try {
+            files = jdbc.query(FileSqls.SELECT_FILES_BY_PRODUCT_ID, params, fileRowMapper);
+        }catch (DataAccessException e){
+            throw new CustomException();
+        }
+        return files;
     }
 }

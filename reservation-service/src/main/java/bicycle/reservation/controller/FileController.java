@@ -1,5 +1,6 @@
 package bicycle.reservation.controller;
 
+import bicycle.common.utils.FileUtil;
 import bicycle.reservation.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,9 @@ public class FileController {
 
     @GetMapping("/img")
     public void getImage(@RequestParam(name="file_id") Integer fileId, HttpServletResponse response){
-        fileService.getFileByFileId(fileId, response);
+        FileUtil fileUtil = new FileUtil();
+        fileUtil.makeFileResponse(fileService.getFileByFileId(fileId), response);
     }
+
 
 }

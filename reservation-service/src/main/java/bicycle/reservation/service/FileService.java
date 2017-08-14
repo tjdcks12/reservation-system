@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface FileService {
     @Transactional(readOnly = true)
-    HttpServletResponse getFileByFileId(Integer fileId, HttpServletResponse response);
+    File getFileByFileId(Integer fileId);
 
 
 

@@ -20,7 +20,7 @@ public class RestProductController {
 
     @GetMapping("/categories/{categoryId}/pages/{page}")
     public List<ProductDto> getProductsByCategoryInPage(@PathVariable("page") Integer page, @PathVariable("categoryId") Integer categoryId) {
-        return productService.getProduct(page,categoryId);
+        return productService.getProducts(page,categoryId);
     }
 
     @GetMapping("/categories/{categoryId}/count")
