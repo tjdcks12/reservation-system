@@ -14,11 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class ProductController {
 
-    @Autowired
+
     ProductService productService;
-    @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    public ProductController(ProductService productService, CategoryService categoryService){
+        this.productService = productService;
+        this.categoryService = categoryService;
+    }
 
     @GetMapping
     public ModelAndView mainPage(ModelAndView modelAndView) {

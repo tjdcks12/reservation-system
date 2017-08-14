@@ -13,7 +13,6 @@ module.exports = extend(eg.Component, {
         this.isMouseOverd = false;
         this.bindSlideEvent();
         this.autoSlide();
-
     },
     bindSlideEvent: function () {
         this.$next.on('click', this.nextPic.bind(this));

@@ -1,4 +1,4 @@
-package bicycle.reservation.dao.Impl;
+package bicycle.reservation.dao.impl;
 
 import bicycle.common.exception.CustomException;
 import bicycle.reservation.config.RootApplicationContextConfig;

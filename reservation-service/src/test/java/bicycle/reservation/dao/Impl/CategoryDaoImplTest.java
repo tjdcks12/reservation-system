@@ -1,16 +1,13 @@
-package bicycle.reservation.dao.Impl;
+package bicycle.reservation.dao.impl;
 
-import bicycle.common.exception.CustomException;
 import bicycle.reservation.config.RootApplicationContextConfig;
 import bicycle.reservation.dao.CategoryDao;
 import bicycle.reservation.model.domain.Category;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.is;

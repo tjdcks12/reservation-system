@@ -1,9 +1,8 @@
-package bicycle.reservation.dao.Impl;
+package bicycle.reservation.dao.impl;
 
 import bicycle.common.exception.CustomException;
 import bicycle.reservation.dao.FileDao;
 import bicycle.reservation.dao.sql.FileSqls;
-import bicycle.reservation.model.domain.Category;
 import bicycle.reservation.model.domain.File;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

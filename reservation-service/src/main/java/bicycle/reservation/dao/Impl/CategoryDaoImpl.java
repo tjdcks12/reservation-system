@@ -1,10 +1,9 @@
-package bicycle.reservation.dao.Impl;
+package bicycle.reservation.dao.impl;
 
 import bicycle.common.exception.CustomException;
 import bicycle.reservation.dao.CategoryDao;
 import bicycle.reservation.dao.sql.CategorySqls;
 import bicycle.reservation.model.domain.Category;
-import bicycle.reservation.model.dto.ProductDto;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,7 +14,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
