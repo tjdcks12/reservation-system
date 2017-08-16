@@ -39,9 +39,9 @@
                 <div class="pagination">
                     <div class="bg_pagination"></div>
                     <div class="figure_pagination">
-                        <span class="num">1</span>
-                        <span class="num off"
-                              data-product-file-count="${fn:length(productFiles)}">/ <span>${fn:length(productFiles)}</span></span>
+                        <span class="num _current-count">1</span>
+                        <span class="num off _max-count"
+                              data-product-max-count="${fn:length(productFiles)}">/ <span>${fn:length(productFiles)}</span></span>
                     </div>
                 </div>
                 <div class="group_visual">

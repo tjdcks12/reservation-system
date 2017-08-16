@@ -19,7 +19,7 @@ public class CommnetServiceImpl implements CommnetService {
 
     @Override
     public List<CommentDto> getRecentCommnetDto(Integer productId) {
-        List<CommentDto> commentDtoList = commentDao.selectRecentCommentDto(productId);
+        List<CommentDto> commentDtoList = commentDao.selectCommentDtoByProductIdInPage(productId, 3 ,0);
         for(CommentDto c: commentDtoList) {
             c.setScore(c.getScore()*5);
         }

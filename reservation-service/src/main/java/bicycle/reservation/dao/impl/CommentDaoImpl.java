@@ -25,9 +25,11 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<CommentDto> selectRecentCommentDto(Integer productId) {
+    public List<CommentDto> selectCommentDtoByProductIdInPage(Integer productId, Integer count, Integer page) {
         Map<String, Object> params = new HashMap<>();
         params.put("productId", productId);
+        params.put("count", count);
+        params.put("page",page);
         List<CommentDto> recentCommentDtos = null;
         try{
             recentCommentDtos = jdbc.query(CommentSqls.SELECT_RECENT_COMMENTS_BY_PRODUCT_ID, params, commentDtoRowMapper);

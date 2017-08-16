@@ -7,5 +7,5 @@ public class CommentSqls {
                     "JOIN users b " +
                     "ON a.user_id = b.id " +
                     "ORDER BY create_date desc " +
-                    "LIMIT 3";
+                    "LIMIT :page, :count";
 }
