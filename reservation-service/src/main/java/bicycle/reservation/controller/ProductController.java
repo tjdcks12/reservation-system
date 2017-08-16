@@ -2,6 +2,7 @@ package bicycle.reservation.controller;
 
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.service.CategoryService;
+import bicycle.reservation.service.CommnetService;
 import bicycle.reservation.service.FileService;
 import bicycle.reservation.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductController {
 
 
-    ProductService productService;
-    CategoryService categoryService;
+    private ProductService productService;
+    private CategoryService categoryService;
+    private CommnetService commnetService;
 
     @Autowired
-    public ProductController(ProductService productService, CategoryService categoryService){
+    public ProductController(ProductService productService, CategoryService categoryService, CommnetService commnetService){
         this.productService = productService;
         this.categoryService = categoryService;
-
+        this.commnetService = commnetService;
     }
 
     @GetMapping
@@ -35,10 +37,11 @@ public class ProductController {
     }
 
     @GetMapping("/exhibition/{productId}")
-    public ModelAndView productDetailPage(@PathVariable(name = "productId") Integer proudctId, ModelAndView modelAndView) {
-        modelAndView.addObject("product",productService.getProductDetailByProductId(proudctId));
-        modelAndView.addObject("productFiles", productService.getFilesByProductId(proudctId));
-        modelAndView.setViewName("productDetail");
+        public ModelAndView productDetailPage(@PathVariable(name = "productId") Integer productId, ModelAndView modelAndView) {
+            modelAndView.addObject("product",productService.getProductDetailByProductId(productId));
+            modelAndView.addObject("productFiles", productService.getFilesByProductId(productId));
+            modelAndView.addObject("recentComments", commnetService.getRecentCommnetDto(productId));
+            modelAndView.setViewName("productDetail");
         return modelAndView;
     }
 
