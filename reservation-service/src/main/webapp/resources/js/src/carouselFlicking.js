@@ -1,10 +1,7 @@
 var extend = require('./egjs-extend');
 module.exports = extend(eg.Component, {
     init: function ($root, options) {
-        bindVariables($root);
-        this.curPage = 1;
-        this.minPage = 1;
-        this.maxPage = this.$ul.find('li').length;
+        this.bindVariables($root);
         this.bindSlideEvent();
         this.isCircular = options.circular;
         if(options.autoSlide) {
@@ -77,37 +74,34 @@ module.exports = extend(eg.Component, {
         this.$ul.animate({"transform": "translateX(" + 0 + "px)"});
     },
     nextPic: function (e) {
-
-        if(this.isCircular) {
-            if (!this.isClicked) {
-                this.isClicked = true;
-                var firstPic = this.$ul.find('li:first-child');
-                this.$ul.append(firstPic[0].outerHTML);
-                this.$ul.animate({"transform": "translateX(" + (-this.picWidth) + "px)"}, function () {
-
-                    firstPic.remove();
-                    this.$ul.css({"transform": "translateX(" + 0 + "px)"});
-                    this.isTouched = false;
-                    this.isClicked = false;
-                }.bind(this));
-            }
+        if (!this.isClicked) {
+            this.isClicked = true;
+            var firstPic = this.$ul.find('li:first-child');
+            this.$ul.append(firstPic[0].outerHTML);
+            this.$ul.animate({"transform": "translateX(" + (-this.picWidth) + "px)"}, this.nextMoveEnd.bind(this, firstPic));
         }
+
+    },
+    nextMoveEnd: function(firstPic){
+        firstPic.remove();
+        this.$ul.css({"transform": "translateX(" + 0 + "px)"});
+        this.isTouched = false;
+        this.isClicked = false;
     },
     prevPic: function (e) {
-
         if (!this.isClicked) {
             this.isClicked = true;
             var lastPic = this.$ul.find('li:last-child');
             this.$ul.prepend(lastPic[0].outerHTML);
             this.$ul.css({"transform": "translateX(" + (-this.picWidth + this.dX) + "px)"});
             this.dX = 0;
-            this.$ul.animate({"transform": "translateX(" + (0) + "px)"}, function () {
-
-                lastPic.remove();
-                this.isTouched = false;
-                this.isClicked = false;
-            }.bind(this));
+            this.$ul.animate({"transform": "translateX(" + (0) + "px)"}, this.prevMoveEnd.bind(this,lastPic));
         }
+    },
+    prevMoveEnd: function(lastPic){
+        lastPic.remove();
+        this.isTouched = false;
+        this.isClicked = false;
     },
     autoSlide: function () {
         this.timerId = setInterval(this.nextPic.bind(this), 2000);
