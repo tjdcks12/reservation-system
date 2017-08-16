@@ -9,7 +9,7 @@ module.exports = extend(eg.Component, {
             this.options = Object.assign({}, {
                 method: 'GET',
                 url: null,
-                contentType: "applicationJSON",
+                contentType: "application/json",
                 data: null
             }), params);
         var d = new Date();

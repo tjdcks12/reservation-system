@@ -1,6 +1,17 @@
 var extend = require('./egjs-extend');
 module.exports = extend(eg.Component, {
     init: function ($root, options) {
+        bindVariables($root);
+        this.curPage = 1;
+        this.minPage = 1;
+        this.maxPage = this.$ul.find('li').length;
+        this.bindSlideEvent();
+        this.isCircular = options.circular;
+        if(options.autoSlide) {
+            this.autoSlide();
+        }
+    },
+    bindVariables: function ($root){
         this.$root = $root;
         this.$ul = $root.find('ul');
         this.$next = $root.find('._next');
@@ -11,10 +22,6 @@ module.exports = extend(eg.Component, {
         this.moveRatio = 5;
         this.isTouched = false;
         this.isMouseOverd = false;
-        this.bindSlideEvent();
-        if(options.autoSlide) {
-            this.autoSlide();
-        }
     },
     bindSlideEvent: function () {
         this.$next.on('click', this.nextPic.bind(this));
@@ -22,8 +29,12 @@ module.exports = extend(eg.Component, {
         this.$ul.on('mousedown touchstart', this.startMouseTouch.bind(this));
         this.$ul.on('mousemove touchmove', this.moveMouseTouch.bind(this));
         this.$ul.on('moveup touchend', this.endMouseTouch.bind(this));
+
     },
     startMouseTouch: function (e) {
+
+        e.preventDefault();
+
         if (e.type === "touchstart") {
             e = e.originalEvent.changedTouches[0];
             this.identifier = e.identifier;
@@ -32,6 +43,7 @@ module.exports = extend(eg.Component, {
         this.isTouched = true;
     },
     moveMouseTouch: function (e) {
+
         if (e.type === "touchmove") {
             e = e.originalEvent.changedTouches[0];
             if (e.identifier !== this.identifier) {
@@ -54,6 +66,7 @@ module.exports = extend(eg.Component, {
         }
     },
     endMouseTouch: function (e) {
+
         if (e.type === "touchEnd") {
             e = e.originalEvent.changedTouches[0];
             if (e.identifier !== this.identifier) {
@@ -64,20 +77,24 @@ module.exports = extend(eg.Component, {
         this.$ul.animate({"transform": "translateX(" + 0 + "px)"});
     },
     nextPic: function (e) {
-        if (!this.isClicked) {
-            this.isClicked = true;
-            var firstPic = this.$ul.find('li:first-child');
-            this.$ul.append(firstPic[0].outerHTML);
-            this.$ul.animate({"transform": "translateX(" + (-this.picWidth) + "px)"}, function () {
 
-                firstPic.remove();
-                this.$ul.css({"transform": "translateX(" + 0 + "px)"});
-                this.isTouched = false;
-                this.isClicked = false;
-            }.bind(this));
+        if(this.isCircular) {
+            if (!this.isClicked) {
+                this.isClicked = true;
+                var firstPic = this.$ul.find('li:first-child');
+                this.$ul.append(firstPic[0].outerHTML);
+                this.$ul.animate({"transform": "translateX(" + (-this.picWidth) + "px)"}, function () {
+
+                    firstPic.remove();
+                    this.$ul.css({"transform": "translateX(" + 0 + "px)"});
+                    this.isTouched = false;
+                    this.isClicked = false;
+                }.bind(this));
+            }
         }
     },
     prevPic: function (e) {
+
         if (!this.isClicked) {
             this.isClicked = true;
             var lastPic = this.$ul.find('li:last-child');
