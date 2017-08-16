@@ -39,7 +39,7 @@ public class ProductDaoImpl implements ProductDao {
             products = jdbc.query(ProductSqls.SELECT_PRODUCTDTO_IN_PAGE, params, productDtoRowMapper);
         } catch (DataAccessException e) {
             //에러 처리
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return products;
     }
@@ -55,7 +55,7 @@ public class ProductDaoImpl implements ProductDao {
             products = jdbc.query(ProductSqls.SELECT_PRODUCTDTO_IN_PAGE_BY_CATEGORYID, params, productDtoRowMapper);
         } catch (DataAccessException e) {
             //에러 처리
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return products;
     }
@@ -71,7 +71,7 @@ public class ProductDaoImpl implements ProductDao {
         } catch (DataAccessException e) {
             //에러 처리
 
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return productDetail;
 
@@ -84,7 +84,7 @@ public class ProductDaoImpl implements ProductDao {
         try {
             productsCount = jdbc.queryForObject(ProductSqls.SELECT_ALL_PRODUCTS_COUNT, params, Integer.class);
         } catch (Exception e) {
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return productsCount;
     }
@@ -97,7 +97,7 @@ public class ProductDaoImpl implements ProductDao {
         try {
             productsCount = jdbc.queryForObject(ProductSqls.SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID, params, Integer.class);
         } catch (Exception e) {
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return productsCount;
     }

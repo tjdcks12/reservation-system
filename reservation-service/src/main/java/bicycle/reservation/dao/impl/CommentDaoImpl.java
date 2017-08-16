@@ -34,7 +34,7 @@ public class CommentDaoImpl implements CommentDao {
         try{
             recentCommentDtos = jdbc.query(CommentSqls.SELECT_RECENT_COMMENTS_BY_PRODUCT_ID, params, commentDtoRowMapper);
         }catch (DataAccessException e){
-            throw new CustomException(e);
+            throw new CustomException("error", e.getMessage());
         }
         return recentCommentDtos;
     }

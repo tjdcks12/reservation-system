@@ -38,8 +38,10 @@ public class WebInitializer implements WebApplicationInitializer {
 
 		// Dispatcher servlet 설정
 		servletContext.addListener(new ContextLoaderListener(context));
+		DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
+		dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet",
-				new DispatcherServlet(context));
+                dispatcherServlet);
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping(MAPPING_URL);
 	}
@@ -49,5 +51,6 @@ public class WebInitializer implements WebApplicationInitializer {
 		context.setConfigLocation(CONFIG_LOCATION);
 		return context;
 	}
-	
+
+
 }

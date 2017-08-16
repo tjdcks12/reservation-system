@@ -36,7 +36,7 @@ public class CategoryDaoImpl implements CategoryDao{
         try {
             categories = jdbc.query(CategorySqls.SELECT_CATEGORY, params, categoryRowMapper);
         }catch (DataAccessException e){
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return categories;
     }
@@ -50,7 +50,7 @@ public class CategoryDaoImpl implements CategoryDao{
         try{
             category = jdbc.queryForObject(CategorySqls.SELECT_CATEGORY_BY_CATEGORY_ID, params, categoryRowMapper);
         }catch (DataAccessException e){
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return category;
     }
@@ -63,7 +63,7 @@ public class CategoryDaoImpl implements CategoryDao{
         try {
              insertResult = insertAction.executeAndReturnKey(params).intValue();
         }catch (Exception e){
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return insertResult;
     }

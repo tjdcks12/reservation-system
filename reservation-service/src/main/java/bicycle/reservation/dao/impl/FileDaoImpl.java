@@ -36,7 +36,7 @@ public class FileDaoImpl implements FileDao {
         try{
             file = jdbc.queryForObject(FileSqls.SELECT_FILE_BY_FILE_ID, params, fileRowMapper);
         } catch (DataAccessException e ){
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
 
         return file;
@@ -49,7 +49,7 @@ public class FileDaoImpl implements FileDao {
         try {
             files = jdbc.queryForList(FileSqls.SELECT_FILES_BY_PRODUCT_ID, params, Integer.class);
         }catch (DataAccessException e){
-            throw new CustomException();
+            throw new CustomException("error", e.getMessage());
         }
         return files;
     }
