@@ -23,4 +23,9 @@ public class ProductSqls {
     public static final String SELECT_PRODUCTS_COUNT_BY_CATEGORY_ID =
             "SELECT count(*) " +
                     "FROM reservation.product WHERE category_id= :categoryId";
+
+    public static final String SELECT_PRODUCT_PRICES_BY_PRODUCT_ID =
+            "SELECT id, price, price_type, product_id, discount_rate, create_date, modify_date " +
+                    "FROM reservation.product_price " +
+                    "WHERE product_id=:productId";
 }

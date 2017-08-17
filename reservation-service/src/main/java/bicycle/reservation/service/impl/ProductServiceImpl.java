@@ -3,6 +3,7 @@ package bicycle.reservation.service.impl;
 import bicycle.reservation.dao.FileDao;
 import bicycle.reservation.dao.ProductDao;
 import bicycle.reservation.model.domain.File;
+import bicycle.reservation.model.domain.ProductPrice;
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.model.dto.ProductDto;
 import bicycle.reservation.service.ProductService;
@@ -59,6 +60,11 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public List<Integer> getFilesByProductId(Integer productId) {
         return fileDao.selectFilesByProductId(productId);
+    }
+
+    @Override
+    public List<ProductPrice> getProductPricesByProductId(Integer productId) {
+        return productDao.selectProductPricesByProductId(productId);
     }
 
 

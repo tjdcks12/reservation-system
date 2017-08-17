@@ -1,5 +1,6 @@
 package bicycle.reservation.dao;
 
+import bicycle.reservation.model.domain.ProductPrice;
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.model.dto.ProductDto;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,6 @@ public interface ProductDao {
     Integer selectAllProductsCount();
 
     Integer selectProductsCountByCategoryId(Integer categoryId);
+
+    List<ProductPrice> selectProductPricesByProductId(Integer productId);
 }

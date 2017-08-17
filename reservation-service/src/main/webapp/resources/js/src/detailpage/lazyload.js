@@ -5,7 +5,7 @@ module.exports = extend(eg.Component, {
         this.$root = $root;
         this.documentHeight = $(document).height();
         this.$window = $(window);
-        this.SCROLL_LOADING_RATIO = 5;
+        this.SCROLL_LOADING_RATIO = 2;
         this.$content = $root.find('._lazyload');
         this.bindLazyLoading();
     },

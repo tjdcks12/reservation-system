@@ -3,6 +3,7 @@ package bicycle.reservation.dao.impl;
 import bicycle.common.exception.CustomException;
 import bicycle.reservation.dao.ProductDao;
 import bicycle.reservation.dao.sql.ProductSqls;
+import bicycle.reservation.model.domain.ProductPrice;
 import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.model.dto.ProductDto;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +24,7 @@ public class ProductDaoImpl implements ProductDao {
     private SimpleJdbcInsert insertAction;
     private RowMapper<ProductDto> productDtoRowMapper = BeanPropertyRowMapper.newInstance(ProductDto.class);
     private RowMapper<ProductDetailDto> productDetailDtoRowMapper = BeanPropertyRowMapper.newInstance(ProductDetailDto.class);
+    private RowMapper<ProductPrice> productPriceRowMapper = BeanPropertyRowMapper.newInstance(ProductPrice.class);
 
     public ProductDaoImpl(DataSource dataSource) {
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
@@ -100,6 +102,19 @@ public class ProductDaoImpl implements ProductDao {
             throw new CustomException("error", e.getMessage());
         }
         return productsCount;
+    }
+
+    @Override
+    public List<ProductPrice> selectProductPricesByProductId(Integer productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        List<ProductPrice> productPrices = null;
+        try {
+            productPrices = jdbc.query(ProductSqls.SELECT_PRODUCT_PRICES_BY_PRODUCT_ID, params, productPriceRowMapper);
+        } catch (Exception e) {
+            throw new CustomException("error", e.getMessage());
+        }
+        return productPrices;
     }
 
 }
