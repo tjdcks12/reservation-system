@@ -23,7 +23,7 @@
         </header>
     </div>
     <hr>
-    <div class="event">
+    <div class="event" data-url="http://220.230.122.151">
         <div class="section_visual">
             <div class="group_visual">
                 <div class="container_visual">

@@ -1,25 +1,31 @@
-var extend = require('./egjs-extend');
-var AjaxCall = require('./ajaxCall');
-var productTemplate = require('./handlebars-templates/product-template.html');
+var extend = require('../components/egjs-extend');
+var AjaxCall = require('../components/ajaxCall');
+var productTemplate = require('../handlebars-templates/product-template.html');
 module.exports = extend(eg.Component, {
     init: function ($element) {
-        this.url = $('.lnk_logo').attr('href');
-        this.$categoryBlock = $element;
-        this.$productBlock = $('.section_event_lst');
-        this.$anchor = $('.anchor.active');
+        this.initVariable($element);
+        this.categoryAjax = new AjaxCall();
+        this.productAjax = new AjaxCall();
+        this.emptyAndAddProducts(this.categoryId);
+        this.$moreButton.on('click', this.moreProducts.bind(this));
+        this.changeScroll();
+    },
+    initVariable: function($element){
+        this.documentHeight = $(document).height();
+        this.$window = $(window);
+        this.url = $element.data('url');
+        this.$categoryBlock = $element.find('.event_tab_lst');
+        this.$productBlock = $element.find('.section_event_lst');
+        this.$anchor = $element.find('.anchor.active');
         this.$rightUl = this.$productBlock.find('.lst_event_box').eq(0);
         this.$leftUl = this.$productBlock.find('.lst_event_box').eq(1);
         this.$moreButton = this.$productBlock.find('._more');
         this.$categoryBlock.on('click', this.toggleCategory.bind(this));
-        this.categoryAjax = new AjaxCall();
-        this.productAjax = new AjaxCall();
         this.page = 0;
         this.pageCount = 4;
         this.maxPage = this.$productBlock.find('.pink').data('product-count') / this.pageCount;
         this.categoryId = 1;
-        this.emptyAndAddProducts(this.categoryId);
-        this.$moreButton.on('click', this.moreProducts.bind(this));
-        this.changeScroll();
+        this.SCROLL_LOADING_RATIO = 10;
     },
     toggleCategory: function (e) {
         var $x = $(e.target).closest('.anchor');
@@ -38,8 +44,14 @@ module.exports = extend(eg.Component, {
         this.ajaxCall({url: categoryUrl}, this.categoryAjax, this.getCount);
     },
     changeScroll: function () {
-        $(window).scroll(function (e) {
-            if ($(document).height() - window.innerHeight - (window.scrollY / 10) < window.scrollY) {
+        this.$window.scroll(function (e) {
+            console.log(this.documentHeight + "도큐먼트 높이");
+            console.log(window.innerHeight + "윈도우 이너높이");
+            console.log((window.scrollY / 10) + "윈도우 스크롤y을 10으로 나눈 값");
+            console.log(window.scrollY + "윈도우 스크롤y");
+
+            if (this.documentHeight - window.innerHeight - (window.scrollY / this.SCROLL_LOADING_RATIO) < window.scrollY) {
+
                 this.moreProducts();
             }
         }.bind(this));

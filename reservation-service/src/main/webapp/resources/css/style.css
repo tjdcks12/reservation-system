@@ -3804,3 +3804,11 @@ button {
 .detail_image {
     max-height: 414px;
 }
+
+.invisible{
+    display: none;
+}
+
+.visible{
+    display: block;
+}

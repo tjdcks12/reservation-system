@@ -48,15 +48,18 @@
                     <div>
                         <div class="container_visual" style="width: 414px;">
                             <ul class="visual_img">
-                                <c:forEach var="productFile" items="${productFiles}">
+                                <c:forEach var="productFile" items="${productFiles}" varStatus="status">
                                     <li class="item" style="width: 414px;"><img alt="" class="img_thumb detail_image"
                                                                                 src="http://220.230.122.151/file/img?file_id=${productFile}">
                                         <span class="img_bg"></span>
                                         <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"><span>${product.name}</span></h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
+                                            <c:if test="${status.first}">
+                                                <div class="visual_txt_inn">
+                                                    <h2 class="visual_txt_tit"><span>${product.name}</span></h2>
+                                                    <p class="visual_txt_dsc"></p>
+
+                                                </div>
+                                            </c:if>
                                         </div>
                                     </li>
                                 </c:forEach>
@@ -106,7 +109,7 @@
                 <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
                 <a href="#" class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i>
                 </a>
-                <a href="#" class="bk_more _close" style="display: none;"> <span class="bk_more_txt">접기</span> <i
+                <a href="#" class="bk_more _close invisible"> <span class="bk_more_txt">접기</span> <i
                         class="fn fn-up2"></i> </a>
             </div>
             <div class="section_event">
@@ -120,7 +123,7 @@
                 </div>
             </div>
             <div class="section_btn">
-                <button type="button" class="bk_btn"><i class="fn fn-nbooking-calender2"></i> <span>예매하기</span></button>
+                <a href="${product.productId}/reserve"><button type="button" class="bk_btn"><i class="fn fn-nbooking-calender2"></i> <span>예매하기</span></button></a>
             </div>
             <div class="section_review_list">
                 <div class="review_box">
@@ -204,8 +207,8 @@
                                 </li>
                                 <li class="detail_info_lst"><strong class="in_tit">[공연정보]</strong>
                                     <ul class="in_img_group">
-                                        <li class="in_img_lst"><img alt="" class="img_thumb"
-                                                                    data-lazy-image="https://ssl.phinf.net/naverbooking/20170131_255/1485825099482NmYMe_JPEG/%B0%F8%BF%AC%C1%A4%BA%B8.jpg?type=a1000">
+                                        <li class="in_img_lst"><img alt="" class="img_thumb _lazyload"
+                                                                    data-original="https://ssl.phinf.net/naverbooking/20170131_255/1485825099482NmYMe_JPEG/%B0%F8%BF%AC%C1%A4%BA%B8.jpg?type=a1000">
                                         </li>
                                     </ul>
                                 </li>
