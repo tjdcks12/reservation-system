@@ -64,7 +64,9 @@ module.exports = extend(eg.Component, {
                 break;
         }
         this.countObj.totalCount = this.countObj.adultCount + this.countObj.teenagerCount + this.countObj.childCount;
+        this.$totalCountBoard.data('total-count', this.countObj.totalCount);
         this.$totalCountBoard.text(productCountTemplate(this.countObj));
+        this.$totalCountBoard.trigger('change');
     },
     togglePriceButtonColor : function () {
         this.$minusButton.toggleClass('disabled');
