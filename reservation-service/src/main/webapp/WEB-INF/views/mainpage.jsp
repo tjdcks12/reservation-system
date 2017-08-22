@@ -44,7 +44,7 @@
                             <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 --->
                             <ul class="visual_img">
                                 <li class="item"
-                                    style="background-image: url(https://lh4.googleusercontent.com/KoQ8iXa5xeINrObIxPdrRLetgC21RBhx2W8exWyxNm6Z48e_PmN24oU7Er6rrsqFV5n8nvyhEug6xSs=w708-h901); width: 338px;  height: 177px;">
+                                    style="background-image: url(https://lh3.googleusercontent.com/f13Eij0R7psnHptt9rFZ4lE_BqHx10BJscrdNxFs09uf_lWQS2xCm3QMqZfkO24U6GDFpQ_fdiwP_OOaZQewaiBupTzx7FnMhhTo9SwwnL8IU71hYRFlcI2UkHilZaZ2SVed7-2fBI7twbesfxhelccmX4sDZwGJ4VfyzRkcb_Qt8-lefx3mZ2Dcx88TWxhYCwMu0nYsfqNWJ9IfObdLP5nnGbfGShBIw-0NSOOj1X7kP-ltTYGfaq24gIE4wkz9yjRkrmVfUQGT2FJ4MIH7ueFmRTsCE3eYWQEFEt8TpFiGrrp2twe01mbO4sHgCvGbXIYvRLDm__fcdlnz6mtp4PGRgJMD66lrO4uN-kS-9VpCVvC_rhZTX-YrO4Teecw41e6oViFsNL1a8tM4fkh-cbHrGOln29p-C8J6PYnesRQpRxHt4hzdQOrEh04nCKkxZuHVA0DifpznB3VefrUtRVHBXdBDMsPbleLGLFXHXPaOYfR6eorJSXrLMcsalqN40Rf-8UU_EIHugSw-QTaZzgS9-JGjQTVEZsQsNHEAUQSldtsipIo8t2Mmt5TeDDkQ7sUp_RaJ=w1252-h950); width: 338px;  height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
@@ -66,7 +66,7 @@
                                     </a>
                                 </li>
                                 <li class="item"
-                                    style="background-image: url(https://lh4.googleusercontent.com/KoQ8iXa5xeINrObIxPdrRLetgC21RBhx2W8exWyxNm6Z48e_PmN24oU7Er6rrsqFV5n8nvyhEug6xSs=w708-h901); width: 338px; height: 177px;">
+                                    style="background-image: url(https://lh3.googleusercontent.com/f13Eij0R7psnHptt9rFZ4lE_BqHx10BJscrdNxFs09uf_lWQS2xCm3QMqZfkO24U6GDFpQ_fdiwP_OOaZQewaiBupTzx7FnMhhTo9SwwnL8IU71hYRFlcI2UkHilZaZ2SVed7-2fBI7twbesfxhelccmX4sDZwGJ4VfyzRkcb_Qt8-lefx3mZ2Dcx88TWxhYCwMu0nYsfqNWJ9IfObdLP5nnGbfGShBIw-0NSOOj1X7kP-ltTYGfaq24gIE4wkz9yjRkrmVfUQGT2FJ4MIH7ueFmRTsCE3eYWQEFEt8TpFiGrrp2twe01mbO4sHgCvGbXIYvRLDm__fcdlnz6mtp4PGRgJMD66lrO4uN-kS-9VpCVvC_rhZTX-YrO4Teecw41e6oViFsNL1a8tM4fkh-cbHrGOln29p-C8J6PYnesRQpRxHt4hzdQOrEh04nCKkxZuHVA0DifpznB3VefrUtRVHBXdBDMsPbleLGLFXHXPaOYfR6eorJSXrLMcsalqN40Rf-8UU_EIHugSw-QTaZzgS9-JGjQTVEZsQsNHEAUQSldtsipIo8t2Mmt5TeDDkQ7sUp_RaJ=w1252-h950); width: 338px; height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
