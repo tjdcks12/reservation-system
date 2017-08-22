@@ -37,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/exhibition/{productId}")
-        public ModelAndView productDetailPage(@PathVariable(name = "productId") Integer productId, ModelAndView modelAndView) {
+    public ModelAndView productDetailPage(@PathVariable(name = "productId") Integer productId, ModelAndView modelAndView) {
             modelAndView.addObject("product",productService.getProductDetailByProductId(productId));
             modelAndView.addObject("productFiles", productService.getFilesByProductId(productId));
             modelAndView.addObject("recentComments", commnetService.getRecentCommnetDto(productId));

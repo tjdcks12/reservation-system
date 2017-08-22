@@ -50,7 +50,7 @@
                             <ul class="visual_img">
                                 <c:forEach var="productFile" items="${productFiles}" varStatus="status">
                                     <li class="item" style="width: 414px;"><img alt="" class="img_thumb detail_image"
-                                                                                src="http://220.230.122.151/file/img?file_id=${productFile}">
+                                                                                src="https://www.grasshoppers.co.kr/file/img?file_id=${productFile}">
                                         <span class="img_bg"></span>
                                         <div class="visual_txt">
                                             <c:if test="${status.first}">
@@ -146,7 +146,7 @@
 
                                                         <img width="90" height="90"
                                                              class="img_vertical_top"
-                                                             src="http://220.230.122.151/file/img?file_id=${comment.fileId}"
+                                                             src="https://www.grasshoppers.co.kr/file/img?file_id=${comment.fileId}"
                                                              alt="리뷰이미지">
 
                                                     </a>

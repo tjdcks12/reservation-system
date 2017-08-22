@@ -16,14 +16,14 @@
     <div class="header">
         <header class="header_tit">
             <h1 class="logo">
-                <a href="http://220.230.122.151" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                <a href="https://www.grasshopers.co.kr" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                 <a href="#" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
             </h1>
             <a href="#" class="btn_my"> <span title="내 예약">MY</span> </a>
         </header>
     </div>
     <hr>
-    <div class="event" data-url="http://220.230.122.151">
+    <div class="event" data-url="https://www.grasshopers.co.kr">
         <div class="section_visual">
             <div class="group_visual">
                 <div class="container_visual">
@@ -44,7 +44,7 @@
                             <!-- [D] 이전,다음 버튼을 클릭할때마다 캐러셀 형태로 순환 됨 --->
                             <ul class="visual_img">
                                 <li class="item"
-                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px;  height: 177px;">
+                                    style="background-image: url(https://lh4.googleusercontent.com/KoQ8iXa5xeINrObIxPdrRLetgC21RBhx2W8exWyxNm6Z48e_PmN24oU7Er6rrsqFV5n8nvyhEug6xSs=w708-h901); width: 338px;  height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
@@ -55,7 +55,7 @@
                                     </a>
                                 </li>
                                 <li class="item"
-                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170119_48/1484802596907hmVDm_JPEG/image.jpg); width: 338px; height: 177px;">
+                                    style="background-image: url(https://lh3.googleusercontent.com/_wW_kNlKgs0bVzThzkAcSzMgs8uDKV_o2PByJaoX1jyjO7gBeaIJ72cC4Laz2hHFKqYlIgy9RiJWrK7FyqgOA76DzJvyN-jBOrcZhVn3alIxJi8lH2qZ-pFHG7dFwAWwBje3gicf3yAaY3JRmOVcLuKf7xKeJJR1-03EXtjtoAR7E2CKflTxRCjx5Kd0xZkDx7_DR0FSyfqbwW2nGDin4eKWdBGapjrvtNCG1CIyOti0z_NJGHe9jekwpA2IfBDNvkuGDs4LtxOnyhTv6BduWHomn_cyRhyLbYFwEeN6UT-QCU2YFaVnj5ZikTKHEpEP9S7CbiaVM2nX5lg5NjfuQS4KCeJU9ByOEiEF69YStrCIeUnjZEFEK8kWYHUQv-ZWiFj0w4z6zJQMLojST5QpzBYAs1Y9hGkGN1Cg2rsK_Q2yEyLlqU_tOeWIRP-vTMX-CnbIwdCKdjRWDZX5VbEt7GZlR0l5CDc6Bb_9VZNJjn2SQDwn714G7bC1X2SUnLdBOSmwWQAFZRKXK4Awj0e89DAW0cSCHx-Yz3eAM1oXZXWdkI0GtOm_tUzGG5-ov1wcE2W3Qc7T=w708-h885); width: 338px; height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
@@ -66,7 +66,7 @@
                                     </a>
                                 </li>
                                 <li class="item"
-                                    style="background-image: url(http://naverbooking.phinf.naver.net/20170209_66/1486628146913la6nC_JPEG/image.jpg); width: 338px; height: 177px;">
+                                    style="background-image: url(https://lh4.googleusercontent.com/KoQ8iXa5xeINrObIxPdrRLetgC21RBhx2W8exWyxNm6Z48e_PmN24oU7Er6rrsqFV5n8nvyhEug6xSs=w708-h901); width: 338px; height: 177px;">
                                     <a href="#"> <span class="img_btm_border"></span> <span
                                             class="img_right_border"></span> <span class="img_bg_gra"></span>
                                         <div class="event_txt">
