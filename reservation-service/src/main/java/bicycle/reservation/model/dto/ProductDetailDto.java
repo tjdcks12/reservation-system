@@ -7,6 +7,7 @@ public class ProductDetailDto {
     private String content;
     private String event;
     private String tel;
+    private String placeName;
     private String location;
     private String homepage;
     private String email;
@@ -29,6 +30,14 @@ public class ProductDetailDto {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
 
     public void setDescription(String description) {

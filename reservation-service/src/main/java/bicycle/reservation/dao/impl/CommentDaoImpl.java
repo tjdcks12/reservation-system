@@ -3,11 +3,15 @@ package bicycle.reservation.dao.impl;
 import bicycle.common.exception.CustomException;
 import bicycle.reservation.dao.CommentDao;
 import bicycle.reservation.dao.sql.CommentSqls;
+import bicycle.reservation.model.domain.ReservationUserComment;
 import bicycle.reservation.model.dto.CommentDto;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -18,10 +22,40 @@ import java.util.Map;
 @Repository
 public class CommentDaoImpl implements CommentDao {
     private NamedParameterJdbcTemplate jdbc;
+    private SimpleJdbcInsert insertAction;
     private RowMapper<CommentDto> commentDtoRowMapper = BeanPropertyRowMapper.newInstance(CommentDto.class);
 
     CommentDaoImpl(DataSource dataSource){
         this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+        this.insertAction = new SimpleJdbcInsert(dataSource).withTableName("reservation_user_comment")
+                .usingGeneratedKeyColumns("id");
+    }
+
+    @Override
+    public Integer insert(ReservationUserComment reservationUserComment) {
+        SqlParameterSource params = new BeanPropertySqlParameterSource(reservationUserComment);
+        return insertAction.executeAndReturnKey(params).intValue();
+    }
+
+    @Override
+    public Double selectAverageScoreByProductId(Integer productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        Double result;
+        try {
+            result = jdbc.queryForObject(CommentSqls.SELECT_AVERAGE_SCORE_BY_PRO_ID, params, Double.class);
+        } catch (Exception e) {
+            result = 0.0;
+            return result;
+        }
+        return result;
+    }
+
+    @Override
+    public Integer selectCountByProId(Integer productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        return jdbc.queryForObject(CommentSqls.SELECT_PRODUCT_COUNT_BY_PRO_ID, params, Integer.class);
     }
 
     @Override
@@ -38,4 +72,5 @@ public class CommentDaoImpl implements CommentDao {
         }
         return recentCommentDtos;
     }
+
 }

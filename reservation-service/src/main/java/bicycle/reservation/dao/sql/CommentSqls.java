@@ -8,4 +8,14 @@ public class CommentSqls {
                     "ON a.user_id = b.id " +
                     "ORDER BY create_date desc " +
                     "LIMIT :page, :count";
+
+    public static final String SELECT_AVERAGE_SCORE_BY_PRO_ID =
+            "SELECT avg(score) " +
+                    "FROM reservation_user_comment " +
+                    "WHERE product_id = :productId";
+    public static final String SELECT_PRODUCT_COUNT_BY_PRO_ID =
+            "SELECT count(*) " +
+                    "FROM reservation_user_comment " +
+                    "WHERE product_id = :productId";
+
 }

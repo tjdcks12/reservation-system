@@ -37,5 +37,6 @@ public class LoggingAdvice {
         logger.error("\n=============" + joinPoint.getTarget().getClass()+ " : " +
                 joinPoint.getSignature().getName() + "() is something wrong =============");
         logger.error("\n=============error message : " + exception.getCause().getMessage() + "=============");
+        exception.printStackTrace();
     }
 }
