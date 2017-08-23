@@ -80,6 +80,9 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
                         count = info.getChildTicketCount();
                         break;
                 }
+                if(count == null){
+                    count = 0;
+                }
                 totalPrice += count * productPrice.getPrice();
             }
             bookedList.setTotalPrice(totalPrice);
@@ -125,6 +128,9 @@ public class ReservationInfoServiceImpl implements ReservationInfoService {
                 case 3:
                     count = info.getChildTicketCount();
                     break;
+            }
+            if(count == null){
+                count = 0;
             }
             totalPrice += count * productPrice.getPrice();
         }

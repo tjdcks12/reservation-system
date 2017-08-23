@@ -1,13 +1,13 @@
 package bicycle.common.utils;
 
 import bicycle.reservation.model.domain.File;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 
 public class FileUtil {
-
 
     public HttpServletResponse makeFileResponse(File file, HttpServletResponse response) {
         // id를 이용하여 파일의 정보를 읽어온다.

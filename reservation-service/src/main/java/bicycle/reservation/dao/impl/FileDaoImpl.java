@@ -7,7 +7,9 @@ import bicycle.reservation.model.domain.File;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -42,6 +44,7 @@ public class FileDaoImpl implements FileDao {
         return file;
     }
 
+    @Override
     public List<Integer> selectFilesByProductId(Integer productId) {
         Map<String, Object> params = new HashMap<>();
         params.put("productId", productId);
@@ -52,5 +55,11 @@ public class FileDaoImpl implements FileDao {
             throw new CustomException("error", e.getMessage());
         }
         return files;
+    }
+
+    @Override
+    public Integer insert(File file) {
+        SqlParameterSource params = new BeanPropertySqlParameterSource(file);
+        return insertAction.executeAndReturnKey(params).intValue();
     }
 }

@@ -1,9 +1,7 @@
 package bicycle.reservation.controller;
 
-import bicycle.reservation.model.dto.ProductDetailDto;
 import bicycle.reservation.service.CategoryService;
-import bicycle.reservation.service.CommnetService;
-import bicycle.reservation.service.FileService;
+import bicycle.reservation.service.CommentService;
 import bicycle.reservation.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +17,13 @@ public class ProductController {
 
     private ProductService productService;
     private CategoryService categoryService;
-    private CommnetService commnetService;
+    private CommentService commentService;
 
     @Autowired
-    public ProductController(ProductService productService, CategoryService categoryService, CommnetService commnetService){
+    public ProductController(ProductService productService, CategoryService categoryService, CommentService commentService){
         this.productService = productService;
         this.categoryService = categoryService;
-        this.commnetService = commnetService;
+        this.commentService = commentService;
     }
 
     @GetMapping
@@ -40,7 +38,7 @@ public class ProductController {
     public ModelAndView productDetailPage(@PathVariable(name = "productId") Integer productId, ModelAndView modelAndView) {
             modelAndView.addObject("product",productService.getProductDetailByProductId(productId));
             modelAndView.addObject("productFiles", productService.getFilesByProductId(productId));
-            modelAndView.addObject("recentComments", commnetService.getRecentCommnetDto(productId));
+            modelAndView.addObject("recentComments", commentService.getRecentCommnetDto(productId));
             modelAndView.setViewName("productDetail");
         return modelAndView;
     }

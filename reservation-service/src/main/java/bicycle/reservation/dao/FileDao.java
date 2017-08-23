@@ -7,4 +7,5 @@ import java.util.List;
 public interface FileDao {
     File selectFileByFileId(Integer fileId);
     List<Integer> selectFilesByProductId(Integer productId);
+    Integer insert(File file);
 }

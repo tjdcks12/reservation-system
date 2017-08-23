@@ -3,7 +3,9 @@ module.exports = {
     entry: {
         'mainpage': './src/mainpage/mainpage.js',
         'detailpage': './src/detailpage/detailpage.js',
-        'reservepage': './src/reservepage/reserve.js'
+        'reservepage': './src/reservepage/reserve.js',
+        'myreservation': './src/myreservationpage/myreservationApp.js',
+        'reviewWrite': './src/reviewwritepage/reviewWriteApp.js'
     },
     output: {
         filename: './dist/[name].js'
