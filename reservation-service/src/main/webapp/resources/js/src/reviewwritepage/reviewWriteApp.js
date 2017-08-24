@@ -110,8 +110,8 @@ $('.bk_btn').on('click', function (e) {
             window.location.href = '/booked/list';
         },
         error: function (res) {
-            alert('에러가 발생했습니다.');
-            location.reload();
+            // alert('에러가 발생했습니다.');
+            // location.reload();
         }
     });
 });
