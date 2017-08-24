@@ -111,7 +111,8 @@ $('.bk_btn').on('click', function (e) {
         },
         error: function (res) {
             // alert('에러가 발생했습니다.');
-            // location.reload();
+            //  location.reload();
+            window.location.href = '/booked/list';
         }
     });
 });
