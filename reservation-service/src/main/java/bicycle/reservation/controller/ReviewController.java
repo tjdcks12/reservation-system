@@ -8,6 +8,7 @@ import bicycle.reservation.service.CommentService;
 import bicycle.reservation.service.FileService;
 import bicycle.reservation.service.ReservationInfoService;
 import bicycle.reservation.service.UserService;
+import org.owasp.esapi.ESAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,8 @@ public class ReviewController {
     @PostMapping
     public String create(@ModelAttribute CommentRegisterFormDto commentForm,
                          @RequestParam("file") MultipartFile[] files) {
+        String comment = ESAPI.encoder().canonicalize(commentForm.getComment());
+        commentForm.setComment(ESAPI.encoder().encodeForHTML(comment));
         logger.info("==============Comment 생성 로딩 시작==============");
         ArrayList<bicycle.reservation.model.domain.File> images = new ArrayList<>();
         String baseDir = baseUrl;
