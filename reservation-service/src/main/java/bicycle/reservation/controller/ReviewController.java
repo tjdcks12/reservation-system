@@ -73,8 +73,8 @@ public class ReviewController {
     @PostMapping
     public String create(@ModelAttribute CommentRegisterFormDto commentForm,
                          @RequestParam("file") MultipartFile[] files) {
-//        String comment = ESAPI.encoder().canonicalize(commentForm.getComment());
-//        commentForm.setComment(ESAPI.encoder().encodeForHTML(comment));
+        String comment = ESAPI.encoder().canonicalize(commentForm.getComment());
+        commentForm.setComment(ESAPI.encoder().encodeForHTML(comment));
         logger.info("==============Comment 생성 로딩 시작==============");
         ArrayList<bicycle.reservation.model.domain.File> images = new ArrayList<>();
         String baseDir = baseUrl;
